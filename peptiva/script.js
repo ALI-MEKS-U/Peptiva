@@ -31,7 +31,7 @@ const products = [
     category: "recovery",
     price: 3800,
     description: "Research-focused peptide combination.",
-    image: "images/BPC VIAL.png"
+    image: "peptiva/images/BPC VIAL.png"
   },
 
   {
@@ -40,7 +40,7 @@ const products = [
     category: "research",
     price: 4600,
     description: "Research-focused product.",
-    image: "images/RETA10MG.png"
+    image: "peptiva/images/RETA10MG.png"
   },
 
   {
@@ -49,7 +49,7 @@ const products = [
     category: "research",
     price: 4600,
     description: "Research-focused compound.",
-    image: "images/SLU.png"
+    image: "peptiva/images/SLU.png"
   },
 
   {
@@ -58,7 +58,7 @@ const products = [
     category: "research",
     price: 4600,
     description: "Research-focused product.",
-    image: "images/igf1.png"
+    image: "peptiva/images/igf1.png"
   },
 
   {
@@ -67,7 +67,7 @@ const products = [
     category: "research",
     price: 8500,
     description: "Research-focused product.",
-    image: "images/RETA10MG.png"
+    image: "peptiva/images/RETA10MG.png"
   },
 
   {
@@ -76,7 +76,7 @@ const products = [
     category: "other",
     price: 8400,
     description: "Research-focused product.",
-    image: "images/TRIZ VIAL.png"
+    image: "peptiva/images/TRIZ VIAL.png"
   },
 
   {
@@ -85,7 +85,7 @@ const products = [
     category: "research",
     price: 6000,
     description: "Research-focused product.",
-    image: "images/GHK.png"
+    image: "peptiva/images/GHK.png"
   },
 
   {
@@ -94,7 +94,7 @@ const products = [
     category: "research",
     price: 4800,
     description: "Research-focused peptide product.",
-    image: "images/kpv.png"
+    image: "peptiva/images/kpv.png"
   }
 
 ];
@@ -328,10 +328,6 @@ function renderProducts(category = "all") {
       grid.appendChild(card);
 
 
-      // =================================================
-      // CARD CLICK
-      // =================================================
-
       card.addEventListener(
         "click",
         event => {
@@ -357,10 +353,6 @@ function renderProducts(category = "all") {
     }
   );
 
-
-  // =====================================================
-  // ADD BUTTONS
-  // =====================================================
 
   document
     .querySelectorAll(
