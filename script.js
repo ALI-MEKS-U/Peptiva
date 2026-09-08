@@ -37,7 +37,7 @@ const products = [
   {
     id: "PT-002",
     name: "Retatrutide 10mg",
-    category: "research",
+    category: "metabolic",
     price: 4600,
     description: "Research-focused product.",
     image: "RETA10MG.png"
@@ -64,7 +64,7 @@ const products = [
   {
     id: "PT-005",
     name: "Retatrutide 20mg",
-    category: "research",
+    category: "metabolic",
     price: 8500,
     description: "Research-focused product.",
     image: "RETA10MG.png"
@@ -73,7 +73,7 @@ const products = [
   {
     id: "PT-006",
     name: "Trizpetide 60mg",
-    category: "other",
+    category: "research",
     price: 8400,
     description: "Research-focused product.",
     image: "TRIZ VIAL.png"
@@ -158,15 +158,12 @@ function renderProducts(category = "all") {
 
   if (!grid) return;
 
-
   grid.innerHTML = "";
-
 
   const searchInput =
     document.getElementById(
       "productSearch"
     );
-
 
   const searchTerm =
     searchInput
@@ -175,7 +172,6 @@ function renderProducts(category = "all") {
           .toLowerCase()
       : "";
 
-
   let filteredProducts =
     category === "all"
       ? products
@@ -183,7 +179,6 @@ function renderProducts(category = "all") {
           product =>
             product.category === category
         );
-
 
   if (searchTerm) {
 
@@ -196,7 +191,6 @@ function renderProducts(category = "all") {
       );
 
   }
-
 
   if (filteredProducts.length === 0) {
 
@@ -220,7 +214,6 @@ function renderProducts(category = "all") {
 
   }
 
-
   filteredProducts.forEach(
     product => {
 
@@ -229,13 +222,10 @@ function renderProducts(category = "all") {
           "div"
         );
 
-
       card.className =
         "product-card";
 
-
       let imageHTML = "";
-
 
       if (product.image) {
 
@@ -271,11 +261,9 @@ function renderProducts(category = "all") {
 
       }
 
-
       card.innerHTML = `
 
         ${imageHTML}
-
 
         <div class="product-info">
 
@@ -285,20 +273,17 @@ function renderProducts(category = "all") {
 
           </div>
 
-
           <h3>
 
             ${product.name}
 
           </h3>
 
-
           <p>
 
             ${product.description}
 
           </p>
-
 
           <div class="product-bottom">
 
@@ -307,7 +292,6 @@ function renderProducts(category = "all") {
               EGP ${formatPrice(product.price)}
 
             </strong>
-
 
             <button
               class="add-button"
@@ -323,7 +307,6 @@ function renderProducts(category = "all") {
         </div>
 
       `;
-
 
       grid.appendChild(card);
 
@@ -345,7 +328,6 @@ function renderProducts(category = "all") {
             return;
 
           }
-
 
           openProductModal(
             product
@@ -397,9 +379,7 @@ function setupSearch() {
       "productSearch"
     );
 
-
   if (!search) return;
-
 
   search.addEventListener(
     "input",
@@ -409,7 +389,6 @@ function setupSearch() {
         document.querySelector(
           ".filter.active"
         );
-
 
       renderProducts(
         activeFilter
@@ -434,7 +413,6 @@ function setupFilters() {
       ".filter"
     );
 
-
   filters.forEach(
     button => {
 
@@ -449,11 +427,9 @@ function setupFilters() {
               )
           );
 
-
           button.classList.add(
             "active"
           );
-
 
           renderProducts(
             button.dataset.filter
@@ -482,16 +458,13 @@ function addToCart(
         item.id === productId
     );
 
-
   if (!product) return;
-
 
   const existing =
     cart.find(
       item =>
         item.id === productId
     );
-
 
   if (existing) {
 
@@ -512,7 +485,6 @@ function addToCart(
     });
 
   }
-
 
   saveCart();
 
@@ -537,7 +509,6 @@ function removeFromCart(
         item.id !== productId
     );
 
-
   saveCart();
 
   updateCart();
@@ -560,12 +531,9 @@ function changeQuantity(
         product.id === productId
     );
 
-
   if (!item) return;
 
-
   item.quantity += amount;
-
 
   if (item.quantity <= 0) {
 
@@ -576,7 +544,6 @@ function changeQuantity(
     return;
 
   }
-
 
   saveCart();
 
@@ -643,24 +610,20 @@ function updateCart() {
       "cartCount"
     );
 
-
   const cartItems =
     document.getElementById(
       "cartItems"
     );
-
 
   const cartTotal =
     document.getElementById(
       "cartTotal"
     );
 
-
   const checkoutTotal =
     document.getElementById(
       "checkoutTotal"
     );
-
 
   if (cartCount) {
 
@@ -668,7 +631,6 @@ function updateCart() {
       getCartCount();
 
   }
-
 
   if (cartTotal) {
 
@@ -679,7 +641,6 @@ function updateCart() {
 
   }
 
-
   if (checkoutTotal) {
 
     checkoutTotal.textContent =
@@ -689,9 +650,7 @@ function updateCart() {
 
   }
 
-
   if (!cartItems) return;
-
 
   if (cart.length === 0) {
 
@@ -711,9 +670,7 @@ function updateCart() {
 
   }
 
-
   cartItems.innerHTML = "";
-
 
   cart.forEach(
     item => {
@@ -723,10 +680,8 @@ function updateCart() {
           "div"
         );
 
-
       cartItem.className =
         "cart-item";
-
 
       cartItem.innerHTML = `
 
@@ -744,7 +699,6 @@ function updateCart() {
 
         </div>
 
-
         <div class="cart-controls">
 
           <button
@@ -755,11 +709,9 @@ function updateCart() {
             −
           </button>
 
-
           <span>
             ${item.quantity}
           </span>
-
 
           <button
             class="quantity-button"
@@ -768,7 +720,6 @@ function updateCart() {
           >
             +
           </button>
-
 
           <button
             class="remove-button"
@@ -780,7 +731,6 @@ function updateCart() {
         </div>
 
       `;
-
 
       cartItems.appendChild(
         cartItem
@@ -806,7 +756,6 @@ function updateCart() {
               "plus"
                 ? 1
                 : -1;
-
 
             changeQuantity(
               button.dataset.id,
@@ -855,18 +804,15 @@ function setupCart() {
       "cartButton"
     );
 
-
   const closeCart =
     document.getElementById(
       "closeCart"
     );
 
-
   const checkoutButton =
     document.getElementById(
       "checkoutButton"
     );
-
 
   if (cartButton) {
 
@@ -877,7 +823,6 @@ function setupCart() {
 
   }
 
-
   if (closeCart) {
 
     closeCart.addEventListener(
@@ -886,7 +831,6 @@ function setupCart() {
     );
 
   }
-
 
   if (checkoutButton) {
 
@@ -903,7 +847,6 @@ function setupCart() {
           return;
 
         }
-
 
         closeCartPanel();
 
@@ -928,7 +871,6 @@ function openCart() {
       "cartOverlay"
     );
 
-
   if (overlay) {
 
     overlay.classList.add(
@@ -950,7 +892,6 @@ function closeCartPanel() {
     document.getElementById(
       "cartOverlay"
     );
-
 
   if (overlay) {
 
@@ -976,43 +917,35 @@ function openProductModal(
       "productModal"
     );
 
-
   const image =
     document.getElementById(
       "modalProductImage"
     );
-
 
   const name =
     document.getElementById(
       "modalProductName"
     );
 
-
   const category =
     document.getElementById(
       "modalProductCategory"
     );
-
 
   const description =
     document.getElementById(
       "modalProductDescription"
     );
 
-
   const price =
     document.getElementById(
       "modalProductPrice"
     );
 
-
   if (!modal) return;
-
 
   selectedProduct =
     product;
-
 
   if (image) {
 
@@ -1024,14 +957,12 @@ function openProductModal(
 
   }
 
-
   if (name) {
 
     name.textContent =
       product.name;
 
   }
-
 
   if (category) {
 
@@ -1040,14 +971,12 @@ function openProductModal(
 
   }
 
-
   if (description) {
 
     description.textContent =
       product.description;
 
   }
-
 
   if (price) {
 
@@ -1057,7 +986,6 @@ function openProductModal(
       )}`;
 
   }
-
 
   modal.classList.add(
     "active"
@@ -1077,18 +1005,15 @@ function setupProductModal() {
       "closeProductModal"
     );
 
-
   const addButton =
     document.getElementById(
       "modalAddToCart"
     );
 
-
   const modal =
     document.getElementById(
       "productModal"
     );
-
 
   if (closeButton) {
 
@@ -1099,7 +1024,6 @@ function setupProductModal() {
 
   }
 
-
   if (addButton) {
 
     addButton.addEventListener(
@@ -1109,11 +1033,9 @@ function setupProductModal() {
         if (!selectedProduct)
           return;
 
-
         addToCart(
           selectedProduct.id
         );
-
 
         closeProductModal();
 
@@ -1121,7 +1043,6 @@ function setupProductModal() {
     );
 
   }
-
 
   if (modal) {
 
@@ -1156,7 +1077,6 @@ function closeProductModal() {
       "productModal"
     );
 
-
   if (modal) {
 
     modal.classList.remove(
@@ -1164,7 +1084,6 @@ function closeProductModal() {
     );
 
   }
-
 
   selectedProduct =
     null;
@@ -1183,12 +1102,10 @@ function setupCheckout() {
       "orderForm"
     );
 
-
   const closeButton =
     document.getElementById(
       "closeCheckout"
     );
-
 
   if (closeButton) {
 
@@ -1199,16 +1116,13 @@ function setupCheckout() {
 
   }
 
-
   if (!form) return;
-
 
   form.addEventListener(
     "submit",
     async event => {
 
       event.preventDefault();
-
 
       if (cart.length === 0) {
 
@@ -1220,7 +1134,6 @@ function setupCheckout() {
 
       }
 
-
       const name =
         document
           .getElementById(
@@ -1228,7 +1141,6 @@ function setupCheckout() {
           )
           .value
           .trim();
-
 
       const phone =
         document
@@ -1238,7 +1150,6 @@ function setupCheckout() {
           .value
           .trim();
 
-
       const city =
         document
           .getElementById(
@@ -1246,7 +1157,6 @@ function setupCheckout() {
           )
           .value
           .trim();
-
 
       const notes =
         document
@@ -1256,7 +1166,6 @@ function setupCheckout() {
           .value
           .trim();
 
-
       const transactionReference =
         document
           .getElementById(
@@ -1264,7 +1173,6 @@ function setupCheckout() {
           )
           .value
           .trim();
-
 
       if (!transactionReference) {
 
@@ -1276,11 +1184,9 @@ function setupCheckout() {
 
       }
 
-
       const orderId =
         "ORD-" +
         Date.now();
-
 
       const orderData = {
 
@@ -1340,7 +1246,6 @@ function setupCheckout() {
           'button[type="submit"]'
         );
 
-
       if (submitButton) {
 
         submitButton.disabled =
@@ -1358,14 +1263,11 @@ function setupCheckout() {
           orderData
         );
 
-
         saveOrderLocally(
           orderData
         );
 
-
         cart = [];
-
 
         saveCart();
 
@@ -1387,7 +1289,6 @@ function setupCheckout() {
           "Order error:",
           error
         );
-
 
         alert(
           "There was a problem submitting the order. Please try again."
@@ -1463,11 +1364,9 @@ function saveOrderLocally(
       )
     ) || [];
 
-
   orders.push(
     orderData
   );
-
 
   localStorage.setItem(
     "peptidesOrders",
@@ -1490,7 +1389,6 @@ function closeCheckout() {
       "checkoutOverlay"
     );
 
-
   if (overlay) {
 
     overlay.classList.remove(
@@ -1510,12 +1408,10 @@ function openCheckout() {
 
   updateCart();
 
-
   const overlay =
     document.getElementById(
       "checkoutOverlay"
     );
-
 
   if (overlay) {
 
@@ -1541,12 +1437,10 @@ function showSuccess(
       "successOverlay"
     );
 
-
   const orderNumber =
     document.getElementById(
       "successOrderId"
     );
-
 
   if (orderNumber) {
 
@@ -1554,7 +1448,6 @@ function showSuccess(
       orderId;
 
   }
-
 
   if (overlay) {
 
@@ -1585,7 +1478,6 @@ document.addEventListener(
           "successOverlay"
         );
 
-
       if (overlay) {
 
         overlay.classList.remove(
@@ -1611,12 +1503,10 @@ function setupMobileMenu() {
       "menuButton"
     );
 
-
   const navLinks =
     document.querySelector(
       ".nav-links"
     );
-
 
   if (
     !menuButton ||
@@ -1626,7 +1516,6 @@ function setupMobileMenu() {
     return;
 
   }
-
 
   menuButton.addEventListener(
     "click",
@@ -1638,7 +1527,6 @@ function setupMobileMenu() {
 
     }
   );
-
 
   navLinks
     .querySelectorAll("a")
