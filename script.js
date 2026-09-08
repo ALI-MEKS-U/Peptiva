@@ -46,7 +46,7 @@ const products = [
   {
     id: "PT-003",
     name: "SLU-PP-332 60 Capsules",
-    category: "research",
+    category: "metabolic",
     price: 4600,
     description: "Research-focused compound.",
     image: "SLU.png"
@@ -55,7 +55,7 @@ const products = [
   {
     id: "PT-004",
     name: "IGF-1 1mg",
-    category: "research",
+    category: "performance",
     price: 4600,
     description: "Research-focused product.",
     image: "igf1.png"
@@ -73,7 +73,7 @@ const products = [
   {
     id: "PT-006",
     name: "Trizpetide 60mg",
-    category: "research",
+    category: "metabolic",
     price: 8400,
     description: "Research-focused product.",
     image: "TRIZ VIAL.png"
@@ -82,7 +82,7 @@ const products = [
   {
     id: "PT-007",
     name: "GHK-CU 50mg",
-    category: "research",
+    category: "care",
     price: 6000,
     description: "Research-focused product.",
     image: "GHK.png"
@@ -91,7 +91,7 @@ const products = [
   {
     id: "PT-008",
     name: "KPV 10mg",
-    category: "research",
+    category: "wellness",
     price: 4800,
     description: "Research-focused peptide product.",
     image: "kpv.png"
