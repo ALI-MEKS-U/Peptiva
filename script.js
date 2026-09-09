@@ -30,70 +30,149 @@ const products = [
     name: "BPC-157 + TB-500 5/5 mg",
     category: "recovery",
     price: 3800,
-    description: "Research-focused peptide combination.",
+
+    description:
+      "Research-focused peptide combination.",
+
+    details:
+      "A research-focused combination of BPC-157 and TB-500 commonly studied in connection with tissue-repair and recovery-related biological processes.",
+
+    howItWorks:
+      "BPC-157 has been investigated in preclinical research involving cellular signaling, angiogenesis, and tissue-repair pathways. TB-500 is related to thymosin beta-4 research and has been studied for its role in cell migration, tissue remodeling, and repair-related processes.",
+
     image: "BPC VIAL.png"
   },
+
 
   {
     id: "PT-002",
     name: "Retatrutide 10mg",
     category: "metabolic",
     price: 4600,
-    description: "Research-focused product.",
+
+    description:
+      "Research-focused product.",
+
+    details:
+      "Retatrutide is an investigational multi-receptor agonist studied extensively in metabolic research.",
+
+    howItWorks:
+      "Retatrutide has been studied as an agonist of three receptor pathways: GLP-1, GIP, and glucagon. Research has focused on how combined signaling through these pathways can influence energy balance, glucose metabolism, and body-weight regulation.",
+
     image: "RETA10MG.png"
   },
+
 
   {
     id: "PT-003",
     name: "SLU-PP-332 60 Capsules",
     category: "metabolic",
     price: 4600,
-    description: "Research-focused compound.",
+
+    description:
+      "Research-focused compound.",
+
+    details:
+      "SLU-PP-332 is a research compound investigated for its interaction with metabolic and energy-regulation pathways.",
+
+    howItWorks:
+      "Preclinical research has investigated SLU-PP-332 in relation to ERR-related signaling, mitochondrial activity, and cellular energy metabolism. These mechanisms are being studied primarily in experimental models.",
+
     image: "SLU.png"
   },
+
 
   {
     id: "PT-004",
     name: "IGF-1 1mg",
     category: "performance",
     price: 4600,
-    description: "Research-focused product.",
+
+    description:
+      "Research-focused product.",
+
+    details:
+      "IGF-1 is a naturally occurring growth factor involved in cellular growth, development, and signaling.",
+
+    howItWorks:
+      "IGF-1 research focuses on its interaction with the IGF-1 receptor and downstream signaling pathways such as PI3K/Akt and MAPK. These pathways are associated with cellular growth, differentiation, and metabolism.",
+
     image: "igf1.png"
   },
+
 
   {
     id: "PT-005",
     name: "Retatrutide 20mg",
     category: "metabolic",
     price: 8500,
-    description: "Research-focused product.",
+
+    description:
+      "Research-focused product.",
+
+    details:
+      "Retatrutide is an investigational compound studied for its effects across multiple metabolic signaling pathways.",
+
+    howItWorks:
+      "Research on retatrutide focuses on combined GLP-1, GIP, and glucagon receptor activity. These pathways are being investigated for their relationship to glucose regulation, energy expenditure, appetite signaling, and metabolic processes.",
+
     image: "RETA10MG.png"
   },
+
 
   {
     id: "PT-006",
     name: "Trizpetide 60mg",
     category: "metabolic",
     price: 8400,
-    description: "Research-focused product.",
+
+    description:
+      "Research-focused product.",
+
+    details:
+      "Research-focused metabolic compound presented for laboratory and scientific research purposes.",
+
+    howItWorks:
+      "Research into metabolic peptide signaling generally examines interactions with hormone and receptor pathways involved in glucose regulation, appetite signaling, and energy metabolism. Specific effects depend on the compound and experimental model.",
+
     image: "TRIZ VIAL.png"
   },
+
 
   {
     id: "PT-007",
     name: "GHK-CU 50mg",
     category: "care",
     price: 6000,
-    description: "Research-focused product.",
+
+    description:
+      "Research-focused product.",
+
+    details:
+      "GHK-Cu is a copper-binding peptide studied in research involving cellular signaling, extracellular matrix processes, and tissue-related biology.",
+
+    howItWorks:
+      "GHK-Cu research has explored its interaction with copper and its relationship to signaling processes involving extracellular matrix proteins, collagen-related pathways, antioxidant activity, and cellular remodeling.",
+
     image: "GHK.png"
   },
+
 
   {
     id: "PT-008",
     name: "KPV 10mg",
     category: "wellness",
     price: 4800,
-    description: "Research-focused peptide product.",
+
+    description:
+      "Research-focused peptide product.",
+
+    details:
+      "KPV is a short peptide fragment studied in experimental research involving inflammatory and cellular signaling pathways.",
+
+    howItWorks:
+      "KPV research has focused on its relationship with inflammatory signaling, including pathways associated with NF-κB and cytokine regulation. Most evidence comes from laboratory and preclinical research.",
+
     image: "kpv.png"
   }
 
@@ -143,6 +222,33 @@ document.addEventListener(
 
   }
 );
+
+
+// =====================================================
+// CATEGORY LABEL
+// =====================================================
+
+function getCategoryLabel(category) {
+
+  const labels = {
+
+    metabolic: "Metabolic",
+
+    recovery: "Recovery",
+
+    performance: "Performance",
+
+    research: "Research",
+
+    care: "Care",
+
+    wellness: "Wellness"
+
+  };
+
+  return labels[category] || category;
+
+}
 
 
 // =====================================================
@@ -269,7 +375,9 @@ function renderProducts(category = "all") {
 
           <div class="product-category">
 
-            ${product.category}
+            ${getCategoryLabel(
+              product.category
+            )}
 
           </div>
 
@@ -289,7 +397,9 @@ function renderProducts(category = "all") {
 
             <strong>
 
-              EGP ${formatPrice(product.price)}
+              EGP ${formatPrice(
+                product.price
+              )}
 
             </strong>
 
@@ -947,6 +1057,11 @@ function openProductModal(
   selectedProduct =
     product;
 
+
+  // ===================================================
+  // BASIC INFO
+  // ===================================================
+
   if (image) {
 
     image.src =
@@ -967,13 +1082,16 @@ function openProductModal(
   if (category) {
 
     category.textContent =
-      product.category;
+      getCategoryLabel(
+        product.category
+      );
 
   }
 
   if (description) {
 
     description.textContent =
+      product.details ||
       product.description;
 
   }
@@ -986,6 +1104,145 @@ function openProductModal(
       )}`;
 
   }
+
+
+  // ===================================================
+  // HOW IT WORKS
+  // ===================================================
+
+  let howSection =
+    document.getElementById(
+      "modalProductHowSection"
+    );
+
+  if (!howSection) {
+
+    howSection =
+      document.createElement(
+        "div"
+      );
+
+    howSection.id =
+      "modalProductHowSection";
+
+    howSection.className =
+      "product-how";
+
+
+    const modalInfo =
+      modal.querySelector(
+        ".product-modal-info"
+      );
+
+    if (modalInfo) {
+
+      const priceElement =
+        document.querySelector(
+          "#modalProductPrice"
+        );
+
+      const priceContainer =
+        priceElement
+          ? priceElement.parentElement
+          : null;
+
+      if (priceContainer) {
+
+        priceContainer.after(
+          howSection
+        );
+
+      } else {
+
+        modalInfo.appendChild(
+          howSection
+        );
+
+      }
+
+    }
+
+  }
+
+
+  howSection.innerHTML = `
+
+    <div class="product-how-block">
+
+      <h3>
+        How it works
+      </h3>
+
+      <p>
+        ${product.howItWorks || 
+          "Research information about this compound and its biological mechanisms."}
+      </p>
+
+    </div>
+
+  `;
+
+
+  // ===================================================
+  // PRODUCT DETAILS
+  // ===================================================
+
+  let detailsSection =
+    document.getElementById(
+      "modalProductDetailsSection"
+    );
+
+  if (!detailsSection) {
+
+    detailsSection =
+      document.createElement(
+        "div"
+      );
+
+    detailsSection.id =
+      "modalProductDetailsSection";
+
+    detailsSection.className =
+      "product-details";
+
+
+    const modalInfo =
+      modal.querySelector(
+        ".product-modal-info"
+      );
+
+    if (modalInfo) {
+
+      modalInfo.appendChild(
+        detailsSection
+      );
+
+    }
+
+  }
+
+
+  detailsSection.innerHTML = `
+
+    <div class="product-details-block">
+
+      <h3>
+        Product Details
+      </h3>
+
+      <p>
+        ${product.details ||
+          product.description}
+      </p>
+
+    </div>
+
+  `;
+
+
+  // ===================================================
+  // OPEN
+  // ===================================================
 
   modal.classList.add(
     "active"
@@ -1015,6 +1272,7 @@ function setupProductModal() {
       "productModal"
     );
 
+
   if (closeButton) {
 
     closeButton.addEventListener(
@@ -1023,6 +1281,7 @@ function setupProductModal() {
     );
 
   }
+
 
   if (addButton) {
 
@@ -1043,6 +1302,7 @@ function setupProductModal() {
     );
 
   }
+
 
   if (modal) {
 
