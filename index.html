@@ -23,40 +23,31 @@
       PEPTIVA
     </a>
 
-
     <nav class="nav-links">
 
-      <a href="#home">
-        Home
-      </a>
+      <a href="#home">Home</a>
 
-      <a href="#products">
-        Products
-      </a>
+      <a href="#products">Products</a>
 
-      <a href="#about">
-        About
-      </a>
+      <a href="#about">About</a>
 
-      <a href="#faq">
-        FAQ
-      </a>
+      <a href="#faq">FAQ</a>
 
     </nav>
-
 
     <button
       class="cart-button"
       id="cartButton"
+      type="button"
     >
       Cart
       <span id="cartCount">0</span>
     </button>
 
-
     <button
       class="menu-button"
       id="menuButton"
+      type="button"
     >
       ☰
     </button>
@@ -77,13 +68,11 @@
 
   <div class="container hero-content">
 
-
     <div class="hero-text">
 
       <div class="eyebrow">
         PREMIUM RESEARCH PRODUCTS
       </div>
-
 
       <h1>
         Precision.<br>
@@ -91,12 +80,10 @@
         Research.
       </h1>
 
-
       <p>
         Explore premium research-focused products from Peptiva,
         presented with a simple and transparent ordering experience.
       </p>
-
 
       <div class="hero-buttons">
 
@@ -107,7 +94,6 @@
           Explore Products
         </a>
 
-
         <a
           href="#about"
           class="btn secondary"
@@ -116,7 +102,6 @@
         </a>
 
       </div>
-
 
       <div class="trust-row">
 
@@ -135,7 +120,6 @@
       </div>
 
     </div>
-
 
     <div class="hero-visual">
 
@@ -169,18 +153,15 @@
 
   <div class="container">
 
-
     <div class="section-heading">
 
       <span class="eyebrow">
         PEPTIVA COLLECTION
       </span>
 
-
       <h2>
         Research Products
       </h2>
-
 
       <p>
         Browse the available products and add your selection to the cart.
@@ -196,32 +177,41 @@
       <button
         class="filter active"
         data-filter="all"
+        type="button"
       >
         All
       </button>
 
-
       <button
         class="filter"
         data-filter="recovery"
+        type="button"
       >
         Recovery
       </button>
 
+      <button
+        class="filter"
+        data-filter="metabolic"
+        type="button"
+      >
+        Metabolic
+      </button>
+
+      <button
+        class="filter"
+        data-filter="performance"
+        type="button"
+      >
+        Performance
+      </button>
 
       <button
         class="filter"
         data-filter="research"
+        type="button"
       >
         Research
-      </button>
-
-
-      <button
-        class="filter"
-        data-filter="other"
-      >
-        Other
       </button>
 
     </div>
@@ -250,18 +240,15 @@
 
   <div class="container">
 
-
     <div class="section-heading">
 
       <span class="eyebrow">
         ABOUT PEPTIVA
       </span>
 
-
       <h2>
         Built Around Research.
       </h2>
-
 
       <p>
         Peptiva provides research-focused products through a
@@ -270,16 +257,13 @@
 
     </div>
 
-
     <div class="about-grid">
-
 
       <div class="about-card">
 
         <h3>
           Quality
         </h3>
-
 
         <p>
           Products are presented with clear product information
@@ -289,13 +273,11 @@
       </div>
 
 
-
       <div class="about-card">
 
         <h3>
           Transparency
         </h3>
-
 
         <p>
           Customers can review their cart and order information
@@ -305,13 +287,11 @@
       </div>
 
 
-
       <div class="about-card">
 
         <h3>
           Research Focus
         </h3>
-
 
         <p>
           Products are presented for research-focused purposes
@@ -319,7 +299,6 @@
         </p>
 
       </div>
-
 
     </div>
 
@@ -339,13 +318,11 @@
 
   <div class="container">
 
-
     <div class="section-heading">
 
       <span class="eyebrow">
         FAQ
       </span>
-
 
       <h2>
         Frequently Asked Questions
@@ -356,13 +333,11 @@
 
     <div class="faq-list">
 
-
       <details>
 
         <summary>
           What are these products?
         </summary>
-
 
         <p>
           They are presented as research-focused products.
@@ -372,13 +347,11 @@
       </details>
 
 
-
       <details>
 
         <summary>
           How do I place an order?
         </summary>
-
 
         <p>
           Add products to your cart, complete checkout,
@@ -389,13 +362,11 @@
       </details>
 
 
-
       <details>
 
         <summary>
           How does InstaPay payment work?
         </summary>
-
 
         <p>
           Your order will show the InstaPay payment information
@@ -405,13 +376,11 @@
       </details>
 
 
-
       <details>
 
         <summary>
           Is my order automatically marked as paid?
         </summary>
-
 
         <p>
           No. Orders are initially marked Pending Payment.
@@ -420,12 +389,137 @@
 
       </details>
 
-
     </div>
 
   </div>
 
 </section>
+
+
+<!-- =====================================================
+     PRODUCT DETAILS MODAL
+===================================================== -->
+
+<div
+  class="overlay"
+  id="productModal"
+>
+
+  <div class="product-modal">
+
+    <!-- CLOSE -->
+
+    <button
+      class="product-modal-close"
+      id="closeProductModal"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+
+    <!-- PRODUCT IMAGE -->
+
+    <div class="product-modal-image">
+
+      <img
+        id="modalProductImage"
+        src=""
+        alt="Product"
+      >
+
+    </div>
+
+
+    <!-- PRODUCT INFO -->
+
+    <div class="product-modal-info">
+
+      <span
+        class="research-badge"
+        id="modalProductCategory"
+      >
+        RESEARCH PRODUCT
+      </span>
+
+
+      <h2 id="modalProductName">
+        Product Name
+      </h2>
+
+
+      <p id="modalProductDescription">
+        Product description.
+      </p>
+
+
+      <!-- PRICE -->
+
+      <div class="product-modal-price">
+
+        <span>
+          Price
+        </span>
+
+        <strong id="modalProductPrice">
+          EGP 0
+        </strong>
+
+      </div>
+
+
+      <!-- HOW IT WORKS -->
+
+      <div
+        class="product-how"
+        id="modalProductHowSection"
+      >
+
+        <h3>
+          How It Works
+        </h3>
+
+        <p id="modalProductHow">
+          Research information will appear here.
+        </p>
+
+      </div>
+
+
+      <!-- PRODUCT DETAILS -->
+
+      <div
+        class="product-details"
+        id="modalProductDetailsSection"
+      >
+
+        <h3>
+          Product Details
+        </h3>
+
+        <p id="modalProductDetails">
+          Product details will appear here.
+        </p>
+
+      </div>
+
+
+      <!-- ADD TO CART -->
+
+      <button
+        class="btn primary full"
+        id="modalAddToCart"
+        type="button"
+      >
+        Add to Cart
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 
 
 <!-- =====================================================
@@ -439,15 +533,16 @@
 
   <div class="side-panel">
 
-
     <div class="panel-header">
 
       <h2>
         Your Cart
       </h2>
 
-
-      <button id="closeCart">
+      <button
+        id="closeCart"
+        type="button"
+      >
         ×
       </button>
 
@@ -462,13 +557,11 @@
 
     <div class="cart-footer">
 
-
       <div class="cart-total">
 
         <span>
           Total
         </span>
-
 
         <strong id="cartTotal">
           EGP 0
@@ -480,10 +573,10 @@
       <button
         id="checkoutButton"
         class="btn primary full"
+        type="button"
       >
         Checkout
       </button>
-
 
     </div>
 
@@ -503,15 +596,16 @@
 
   <div class="checkout-panel">
 
-
     <div class="panel-header">
 
       <h2>
         Checkout
       </h2>
 
-
-      <button id="closeCheckout">
+      <button
+        id="closeCheckout"
+        type="button"
+      >
         ×
       </button>
 
@@ -583,12 +677,9 @@
       </label>
 
 
-      <!-- =================================================
-           INSTAPAY
-      ================================================= -->
+      <!-- INSTAPAY -->
 
       <div class="payment-box">
-
 
         <div class="payment-title">
           Pay with InstaPay
@@ -597,13 +688,11 @@
 
         <div class="payment-info">
 
-
           <div>
 
             <span>
               InstaPay
             </span>
-
 
             <strong>
               5484460053029716
@@ -618,13 +707,11 @@
               Amount
             </span>
 
-
             <strong id="checkoutTotal">
               EGP 0
             </strong>
 
           </div>
-
 
         </div>
 
@@ -635,18 +722,15 @@
             1. Transfer the exact amount using InstaPay.
           </p>
 
-
           <p>
             2. Complete the transfer before submitting the order.
           </p>
-
 
           <p>
             3. Enter your transaction reference below.
           </p>
 
         </div>
-
 
       </div>
 
@@ -708,7 +792,6 @@
 
   <div class="success-panel">
 
-
     <div class="success-icon">
       ✓
     </div>
@@ -737,10 +820,10 @@
     <button
       id="closeSuccess"
       class="btn primary"
+      type="button"
     >
       Done
     </button>
-
 
   </div>
 
@@ -755,13 +838,11 @@
 
   <div class="container footer-content">
 
-
     <div>
 
       <strong>
         PEPTIVA
       </strong>
-
 
       <p>
         Premium research products.
@@ -777,7 +858,6 @@
       approved treatments or professional medical advice.
 
     </div>
-
 
   </div>
 
