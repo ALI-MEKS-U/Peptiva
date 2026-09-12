@@ -16,7 +16,11 @@ const GOOGLE_SCRIPT_URL =
 // =====================================================
 
 const INSTAPAY_NUMBER =
-  "5484460053029716";
+  "alimekwy08@instapay";
+
+
+const INSTAPAY_LINK =
+  "https://ipn.eg/S/alimekwy08/instapay/4bRNlE";
 
 
 // =====================================================
@@ -30,16 +34,8 @@ const products = [
     name: "BPC-157 + TB-500 5/5 mg",
     category: "recovery",
     price: 3800,
-
     description:
       "Research-focused peptide combination.",
-
-    details:
-      "A research-focused combination of BPC-157 and TB-500 commonly studied in connection with tissue-repair and recovery-related biological processes.",
-
-    howItWorks:
-      "BPC-157 has been investigated in preclinical research involving cellular signaling, angiogenesis, and tissue-repair pathways. TB-500 is related to thymosin beta-4 research and has been studied for its role in cell migration, tissue remodeling, and repair-related processes.",
-
     image: "BPC VIAL.png"
   },
 
@@ -47,18 +43,10 @@ const products = [
   {
     id: "PT-002",
     name: "Retatrutide 10mg",
-    category: "metabolic",
-    price: 5000,
-
+    category: "research",
+    price: 4600,
     description:
       "Research-focused product.",
-
-    details:
-      "Retatrutide is an investigational multi-receptor agonist studied extensively in metabolic research.",
-
-    howItWorks:
-      "Retatrutide has been studied as an agonist of three receptor pathways: GLP-1, GIP, and glucagon. Research has focused on how combined signaling through these pathways can influence energy balance, glucose metabolism, and body-weight regulation.",
-
     image: "RETA10MG.png"
   },
 
@@ -66,18 +54,10 @@ const products = [
   {
     id: "PT-003",
     name: "SLU-PP-332 60 Capsules",
-    category: "metabolic",
-    price: 5600,
-
+    category: "research",
+    price: 4600,
     description:
       "Research-focused compound.",
-
-    details:
-      "SLU-PP-332 is a research compound investigated for its interaction with metabolic and energy-regulation pathways.",
-
-    howItWorks:
-      "Preclinical research has investigated SLU-PP-332 in relation to ERR-related signaling, mitochondrial activity, and cellular energy metabolism. These mechanisms are being studied primarily in experimental models.",
-
     image: "SLU.png"
   },
 
@@ -85,18 +65,10 @@ const products = [
   {
     id: "PT-004",
     name: "IGF-1 1mg",
-    category: "performance",
+    category: "research",
     price: 4600,
-
     description:
       "Research-focused product.",
-
-    details:
-      "IGF-1 is a naturally occurring growth factor involved in cellular growth, development, and signaling.",
-
-    howItWorks:
-      "IGF-1 research focuses on its interaction with the IGF-1 receptor and downstream signaling pathways such as PI3K/Akt and MAPK. These pathways are associated with cellular growth, differentiation, and metabolism.",
-
     image: "igf1.png"
   },
 
@@ -104,18 +76,10 @@ const products = [
   {
     id: "PT-005",
     name: "Retatrutide 20mg",
-    category: "metabolic",
+    category: "research",
     price: 8500,
-
     description:
       "Research-focused product.",
-
-    details:
-      "Retatrutide is an investigational compound studied for its effects across multiple metabolic signaling pathways.",
-
-    howItWorks:
-      "Research on retatrutide focuses on combined GLP-1, GIP, and glucagon receptor activity. These pathways are being investigated for their relationship to glucose regulation, energy expenditure, appetite signaling, and metabolic processes.",
-
     image: "RETA10MG.png"
   },
 
@@ -123,18 +87,10 @@ const products = [
   {
     id: "PT-006",
     name: "Trizpetide 60mg",
-    category: "metabolic",
+    category: "other",
     price: 8400,
-
     description:
       "Research-focused product.",
-
-    details:
-      "Research-focused metabolic compound presented for laboratory and scientific research purposes.",
-
-    howItWorks:
-      "Research into metabolic peptide signaling generally examines interactions with hormone and receptor pathways involved in glucose regulation, appetite signaling, and energy metabolism. Specific effects depend on the compound and experimental model.",
-
     image: "TRIZ VIAL.png"
   },
 
@@ -142,18 +98,10 @@ const products = [
   {
     id: "PT-007",
     name: "GHK-CU 50mg",
-    category: "care",
+    category: "research",
     price: 6000,
-
     description:
       "Research-focused product.",
-
-    details:
-      "GHK-Cu is a copper-binding peptide studied in research involving cellular signaling, extracellular matrix processes, and tissue-related biology.",
-
-    howItWorks:
-      "GHK-Cu research has explored its interaction with copper and its relationship to signaling processes involving extracellular matrix proteins, collagen-related pathways, antioxidant activity, and cellular remodeling.",
-
     image: "GHK.png"
   },
 
@@ -161,18 +109,10 @@ const products = [
   {
     id: "PT-008",
     name: "KPV 10mg",
-    category: "wellness",
+    category: "research",
     price: 4800,
-
     description:
       "Research-focused peptide product.",
-
-    details:
-      "KPV is a short peptide fragment studied in experimental research involving inflammatory and cellular signaling pathways.",
-
-    howItWorks:
-      "KPV research has focused on its relationship with inflammatory signaling, including pathways associated with NF-κB and cytokine regulation. Most evidence comes from laboratory and preclinical research.",
-
     image: "kpv.png"
   }
 
@@ -185,7 +125,9 @@ const products = [
 
 let cart =
   JSON.parse(
-    localStorage.getItem("peptidesCart")
+    localStorage.getItem(
+      "peptidesCart"
+    )
   ) || [];
 
 
@@ -225,51 +167,30 @@ document.addEventListener(
 
 
 // =====================================================
-// CATEGORY LABEL
-// =====================================================
-
-function getCategoryLabel(category) {
-
-  const labels = {
-
-    metabolic: "Metabolic",
-
-    recovery: "Recovery",
-
-    performance: "Performance",
-
-    research: "Research",
-
-    care: "Care",
-
-    wellness: "Wellness"
-
-  };
-
-  return labels[category] || category;
-
-}
-
-
-// =====================================================
 // RENDER PRODUCTS
 // =====================================================
 
-function renderProducts(category = "all") {
+function renderProducts(
+  category = "all"
+) {
 
   const grid =
     document.getElementById(
       "productsGrid"
     );
 
+
   if (!grid) return;
 
+
   grid.innerHTML = "";
+
 
   const searchInput =
     document.getElementById(
       "productSearch"
     );
+
 
   const searchTerm =
     searchInput
@@ -278,13 +199,16 @@ function renderProducts(category = "all") {
           .toLowerCase()
       : "";
 
+
   let filteredProducts =
     category === "all"
       ? products
       : products.filter(
           product =>
-            product.category === category
+            product.category ===
+            category
         );
+
 
   if (searchTerm) {
 
@@ -298,10 +222,12 @@ function renderProducts(category = "all") {
 
   }
 
-  if (filteredProducts.length === 0) {
+
+  if (
+    filteredProducts.length === 0
+  ) {
 
     grid.innerHTML = `
-
       <div class="no-products">
 
         <h3>
@@ -313,12 +239,12 @@ function renderProducts(category = "all") {
         </p>
 
       </div>
-
     `;
 
     return;
 
   }
+
 
   filteredProducts.forEach(
     product => {
@@ -328,10 +254,13 @@ function renderProducts(category = "all") {
           "div"
         );
 
+
       card.className =
         "product-card";
 
+
       let imageHTML = "";
+
 
       if (product.image) {
 
@@ -349,16 +278,15 @@ function renderProducts(category = "all") {
 
         `;
 
-      } else {
+      }
+      else {
 
         imageHTML = `
 
           <div class="product-image">
 
             <div class="product-placeholder">
-
               ${product.name.charAt(0)}
-
             </div>
 
           </div>
@@ -367,49 +295,42 @@ function renderProducts(category = "all") {
 
       }
 
+
       card.innerHTML = `
 
         ${imageHTML}
 
+
         <div class="product-info">
 
           <div class="product-category">
-
-            ${getCategoryLabel(
-              product.category
-            )}
-
+            ${product.category}
           </div>
 
+
           <h3>
-
             ${product.name}
-
           </h3>
 
+
           <p>
-
             ${product.description}
-
           </p>
+
 
           <div class="product-bottom">
 
             <strong>
-
-              EGP ${formatPrice(
-                product.price
-              )}
-
+              EGP ${formatPrice(product.price)}
             </strong>
+
 
             <button
               class="add-button"
               data-id="${product.id}"
+              type="button"
             >
-
               Add to Cart
-
             </button>
 
           </div>
@@ -418,12 +339,9 @@ function renderProducts(category = "all") {
 
       `;
 
+
       grid.appendChild(card);
 
-
-      // =================================================
-      // CARD CLICK
-      // =================================================
 
       card.addEventListener(
         "click",
@@ -439,6 +357,7 @@ function renderProducts(category = "all") {
 
           }
 
+
           openProductModal(
             product
           );
@@ -449,10 +368,6 @@ function renderProducts(category = "all") {
     }
   );
 
-
-  // =====================================================
-  // ADD BUTTONS
-  // =====================================================
 
   document
     .querySelectorAll(
@@ -489,7 +404,9 @@ function setupSearch() {
       "productSearch"
     );
 
+
   if (!search) return;
+
 
   search.addEventListener(
     "input",
@@ -499,6 +416,7 @@ function setupSearch() {
         document.querySelector(
           ".filter.active"
         );
+
 
       renderProducts(
         activeFilter
@@ -523,6 +441,7 @@ function setupFilters() {
       ".filter"
     );
 
+
   filters.forEach(
     button => {
 
@@ -537,9 +456,11 @@ function setupFilters() {
               )
           );
 
+
           button.classList.add(
             "active"
           );
+
 
           renderProducts(
             button.dataset.filter
@@ -568,7 +489,9 @@ function addToCart(
         item.id === productId
     );
 
+
   if (!product) return;
+
 
   const existing =
     cart.find(
@@ -576,25 +499,32 @@ function addToCart(
         item.id === productId
     );
 
+
   if (existing) {
 
     existing.quantity += 1;
 
-  } else {
+  }
+  else {
 
     cart.push({
 
-      id: product.id,
+      id:
+        product.id,
 
-      name: product.name,
+      name:
+        product.name,
 
-      price: product.price,
+      price:
+        product.price,
 
-      quantity: 1
+      quantity:
+        1
 
     });
 
   }
+
 
   saveCart();
 
@@ -619,6 +549,7 @@ function removeFromCart(
         item.id !== productId
     );
 
+
   saveCart();
 
   updateCart();
@@ -627,7 +558,7 @@ function removeFromCart(
 
 
 // =====================================================
-// QUANTITY
+// CHANGE QUANTITY
 // =====================================================
 
 function changeQuantity(
@@ -641,9 +572,12 @@ function changeQuantity(
         product.id === productId
     );
 
+
   if (!item) return;
 
+
   item.quantity += amount;
+
 
   if (item.quantity <= 0) {
 
@@ -654,6 +588,7 @@ function changeQuantity(
     return;
 
   }
+
 
   saveCart();
 
@@ -677,16 +612,24 @@ function saveCart() {
 
 
 // =====================================================
-// TOTAL
+// CART TOTAL
 // =====================================================
 
 function getCartTotal() {
 
   return cart.reduce(
-    (total, item) =>
-      total +
-      item.price *
-      item.quantity,
+    (
+      total,
+      item
+    ) => {
+
+      return (
+        total +
+        item.price *
+        item.quantity
+      );
+
+    },
     0
   );
 
@@ -694,15 +637,23 @@ function getCartTotal() {
 
 
 // =====================================================
-// COUNT
+// CART COUNT
 // =====================================================
 
 function getCartCount() {
 
   return cart.reduce(
-    (total, item) =>
-      total +
-      item.quantity,
+    (
+      total,
+      item
+    ) => {
+
+      return (
+        total +
+        item.quantity
+      );
+
+    },
     0
   );
 
@@ -720,20 +671,24 @@ function updateCart() {
       "cartCount"
     );
 
+
   const cartItems =
     document.getElementById(
       "cartItems"
     );
+
 
   const cartTotal =
     document.getElementById(
       "cartTotal"
     );
 
+
   const checkoutTotal =
     document.getElementById(
       "checkoutTotal"
     );
+
 
   if (cartCount) {
 
@@ -741,6 +696,7 @@ function updateCart() {
       getCartCount();
 
   }
+
 
   if (cartTotal) {
 
@@ -751,6 +707,7 @@ function updateCart() {
 
   }
 
+
   if (checkoutTotal) {
 
     checkoutTotal.textContent =
@@ -760,7 +717,9 @@ function updateCart() {
 
   }
 
+
   if (!cartItems) return;
+
 
   if (cart.length === 0) {
 
@@ -780,7 +739,9 @@ function updateCart() {
 
   }
 
+
   cartItems.innerHTML = "";
+
 
   cart.forEach(
     item => {
@@ -790,8 +751,10 @@ function updateCart() {
           "div"
         );
 
+
       cartItem.className =
         "cart-item";
+
 
       cartItem.innerHTML = `
 
@@ -809,31 +772,38 @@ function updateCart() {
 
         </div>
 
+
         <div class="cart-controls">
 
           <button
             class="quantity-button"
             data-action="minus"
             data-id="${item.id}"
+            type="button"
           >
             −
           </button>
+
 
           <span>
             ${item.quantity}
           </span>
 
+
           <button
             class="quantity-button"
             data-action="plus"
             data-id="${item.id}"
+            type="button"
           >
             +
           </button>
 
+
           <button
             class="remove-button"
             data-id="${item.id}"
+            type="button"
           >
             ×
           </button>
@@ -841,6 +811,7 @@ function updateCart() {
         </div>
 
       `;
+
 
       cartItems.appendChild(
         cartItem
@@ -866,6 +837,7 @@ function updateCart() {
               "plus"
                 ? 1
                 : -1;
+
 
             changeQuantity(
               button.dataset.id,
@@ -914,15 +886,18 @@ function setupCart() {
       "cartButton"
     );
 
+
   const closeCart =
     document.getElementById(
       "closeCart"
     );
 
+
   const checkoutButton =
     document.getElementById(
       "checkoutButton"
     );
+
 
   if (cartButton) {
 
@@ -933,6 +908,7 @@ function setupCart() {
 
   }
 
+
   if (closeCart) {
 
     closeCart.addEventListener(
@@ -942,13 +918,16 @@ function setupCart() {
 
   }
 
+
   if (checkoutButton) {
 
     checkoutButton.addEventListener(
       "click",
       () => {
 
-        if (cart.length === 0) {
+        if (
+          cart.length === 0
+        ) {
 
           alert(
             "Your cart is empty."
@@ -957,6 +936,7 @@ function setupCart() {
           return;
 
         }
+
 
         closeCartPanel();
 
@@ -981,6 +961,7 @@ function openCart() {
       "cartOverlay"
     );
 
+
   if (overlay) {
 
     overlay.classList.add(
@@ -1002,6 +983,7 @@ function closeCartPanel() {
     document.getElementById(
       "cartOverlay"
     );
+
 
   if (overlay) {
 
@@ -1027,40 +1009,43 @@ function openProductModal(
       "productModal"
     );
 
+
   const image =
     document.getElementById(
       "modalProductImage"
     );
+
 
   const name =
     document.getElementById(
       "modalProductName"
     );
 
+
   const category =
     document.getElementById(
       "modalProductCategory"
     );
+
 
   const description =
     document.getElementById(
       "modalProductDescription"
     );
 
+
   const price =
     document.getElementById(
       "modalProductPrice"
     );
 
+
   if (!modal) return;
+
 
   selectedProduct =
     product;
 
-
-  // ===================================================
-  // BASIC INFO
-  // ===================================================
 
   if (image) {
 
@@ -1072,6 +1057,7 @@ function openProductModal(
 
   }
 
+
   if (name) {
 
     name.textContent =
@@ -1079,22 +1065,22 @@ function openProductModal(
 
   }
 
+
   if (category) {
 
     category.textContent =
-      getCategoryLabel(
-        product.category
-      );
+      product.category;
 
   }
+
 
   if (description) {
 
     description.textContent =
-      product.details ||
       product.description;
 
   }
+
 
   if (price) {
 
@@ -1105,144 +1091,6 @@ function openProductModal(
 
   }
 
-
-  // ===================================================
-  // HOW IT WORKS
-  // ===================================================
-
-  let howSection =
-    document.getElementById(
-      "modalProductHowSection"
-    );
-
-  if (!howSection) {
-
-    howSection =
-      document.createElement(
-        "div"
-      );
-
-    howSection.id =
-      "modalProductHowSection";
-
-    howSection.className =
-      "product-how";
-
-
-    const modalInfo =
-      modal.querySelector(
-        ".product-modal-info"
-      );
-
-    if (modalInfo) {
-
-      const priceElement =
-        document.querySelector(
-          "#modalProductPrice"
-        );
-
-      const priceContainer =
-        priceElement
-          ? priceElement.parentElement
-          : null;
-
-      if (priceContainer) {
-
-        priceContainer.after(
-          howSection
-        );
-
-      } else {
-
-        modalInfo.appendChild(
-          howSection
-        );
-
-      }
-
-    }
-
-  }
-
-
-  howSection.innerHTML = `
-
-    <div class="product-how-block">
-
-      <h3>
-        How it works
-      </h3>
-
-      <p>
-        ${product.howItWorks || 
-          "Research information about this compound and its biological mechanisms."}
-      </p>
-
-    </div>
-
-  `;
-
-
-  // ===================================================
-  // PRODUCT DETAILS
-  // ===================================================
-
-  let detailsSection =
-    document.getElementById(
-      "modalProductDetailsSection"
-    );
-
-  if (!detailsSection) {
-
-    detailsSection =
-      document.createElement(
-        "div"
-      );
-
-    detailsSection.id =
-      "modalProductDetailsSection";
-
-    detailsSection.className =
-      "product-details";
-
-
-    const modalInfo =
-      modal.querySelector(
-        ".product-modal-info"
-      );
-
-    if (modalInfo) {
-
-      modalInfo.appendChild(
-        detailsSection
-      );
-
-    }
-
-  }
-
-
-  detailsSection.innerHTML = `
-
-    <div class="product-details-block">
-
-      <h3>
-        Product Details
-      </h3>
-
-      <p>
-        ${product.details ||
-          product.description}
-      </p>
-
-    </div>
-
-  `;
-
-
-  // ===================================================
-  // OPEN
-  // ===================================================
 
   modal.classList.add(
     "active"
@@ -1262,10 +1110,12 @@ function setupProductModal() {
       "closeProductModal"
     );
 
+
   const addButton =
     document.getElementById(
       "modalAddToCart"
     );
+
 
   const modal =
     document.getElementById(
@@ -1292,9 +1142,11 @@ function setupProductModal() {
         if (!selectedProduct)
           return;
 
+
         addToCart(
           selectedProduct.id
         );
+
 
         closeProductModal();
 
@@ -1337,6 +1189,7 @@ function closeProductModal() {
       "productModal"
     );
 
+
   if (modal) {
 
     modal.classList.remove(
@@ -1344,6 +1197,7 @@ function closeProductModal() {
     );
 
   }
+
 
   selectedProduct =
     null;
@@ -1362,10 +1216,12 @@ function setupCheckout() {
       "orderForm"
     );
 
+
   const closeButton =
     document.getElementById(
       "closeCheckout"
     );
+
 
   if (closeButton) {
 
@@ -1376,7 +1232,9 @@ function setupCheckout() {
 
   }
 
+
   if (!form) return;
+
 
   form.addEventListener(
     "submit",
@@ -1384,7 +1242,10 @@ function setupCheckout() {
 
       event.preventDefault();
 
-      if (cart.length === 0) {
+
+      if (
+        cart.length === 0
+      ) {
 
         alert(
           "Your cart is empty."
@@ -1394,6 +1255,7 @@ function setupCheckout() {
 
       }
 
+
       const name =
         document
           .getElementById(
@@ -1401,6 +1263,7 @@ function setupCheckout() {
           )
           .value
           .trim();
+
 
       const phone =
         document
@@ -1410,6 +1273,7 @@ function setupCheckout() {
           .value
           .trim();
 
+
       const city =
         document
           .getElementById(
@@ -1417,6 +1281,7 @@ function setupCheckout() {
           )
           .value
           .trim();
+
 
       const notes =
         document
@@ -1426,6 +1291,7 @@ function setupCheckout() {
           .value
           .trim();
 
+
       const transactionReference =
         document
           .getElementById(
@@ -1434,7 +1300,10 @@ function setupCheckout() {
           .value
           .trim();
 
-      if (!transactionReference) {
+
+      if (
+        !transactionReference
+      ) {
 
         alert(
           "Please enter your InstaPay transaction reference."
@@ -1444,9 +1313,11 @@ function setupCheckout() {
 
       }
 
+
       const orderId =
         "ORD-" +
         Date.now();
+
 
       const orderData = {
 
@@ -1461,6 +1332,9 @@ function setupCheckout() {
 
         payment_account:
           INSTAPAY_NUMBER,
+
+        payment_link:
+          INSTAPAY_LINK,
 
         payment_reference:
           transactionReference,
@@ -1506,6 +1380,7 @@ function setupCheckout() {
           'button[type="submit"]'
         );
 
+
       if (submitButton) {
 
         submitButton.disabled =
@@ -1523,32 +1398,38 @@ function setupCheckout() {
           orderData
         );
 
+
         saveOrderLocally(
           orderData
         );
 
+
         cart = [];
+
 
         saveCart();
 
         updateCart();
 
+
         form.reset();
 
+
         closeCheckout();
+
 
         showSuccess(
           orderId
         );
 
       }
-
       catch (error) {
 
         console.error(
           "Order error:",
           error
         );
+
 
         alert(
           "There was a problem submitting the order. Please try again."
@@ -1574,7 +1455,7 @@ function setupCheckout() {
 
 
 // =====================================================
-// SEND TO GOOGLE SHEETS
+// GOOGLE SHEETS
 // =====================================================
 
 async function sendOrderToGoogleSheets(
@@ -1610,7 +1491,7 @@ async function sendOrderToGoogleSheets(
 
 
 // =====================================================
-// LOCAL ORDER
+// SAVE ORDER LOCALLY
 // =====================================================
 
 function saveOrderLocally(
@@ -1624,9 +1505,11 @@ function saveOrderLocally(
       )
     ) || [];
 
+
   orders.push(
     orderData
   );
+
 
   localStorage.setItem(
     "peptidesOrders",
@@ -1634,6 +1517,32 @@ function saveOrderLocally(
       orders
     )
   );
+
+}
+
+
+// =====================================================
+// OPEN CHECKOUT
+// =====================================================
+
+function openCheckout() {
+
+  updateCart();
+
+
+  const overlay =
+    document.getElementById(
+      "checkoutOverlay"
+    );
+
+
+  if (overlay) {
+
+    overlay.classList.add(
+      "active"
+    );
+
+  }
 
 }
 
@@ -1649,33 +1558,10 @@ function closeCheckout() {
       "checkoutOverlay"
     );
 
+
   if (overlay) {
 
     overlay.classList.remove(
-      "active"
-    );
-
-  }
-
-}
-
-
-// =====================================================
-// OPEN CHECKOUT
-// =====================================================
-
-function openCheckout() {
-
-  updateCart();
-
-  const overlay =
-    document.getElementById(
-      "checkoutOverlay"
-    );
-
-  if (overlay) {
-
-    overlay.classList.add(
       "active"
     );
 
@@ -1697,10 +1583,12 @@ function showSuccess(
       "successOverlay"
     );
 
+
   const orderNumber =
     document.getElementById(
       "successOrderId"
     );
+
 
   if (orderNumber) {
 
@@ -1708,6 +1596,7 @@ function showSuccess(
       orderId;
 
   }
+
 
   if (overlay) {
 
@@ -1738,6 +1627,7 @@ document.addEventListener(
           "successOverlay"
         );
 
+
       if (overlay) {
 
         overlay.classList.remove(
@@ -1763,10 +1653,12 @@ function setupMobileMenu() {
       "menuButton"
     );
 
+
   const navLinks =
     document.querySelector(
       ".nav-links"
     );
+
 
   if (
     !menuButton ||
@@ -1776,6 +1668,7 @@ function setupMobileMenu() {
     return;
 
   }
+
 
   menuButton.addEventListener(
     "click",
@@ -1787,6 +1680,7 @@ function setupMobileMenu() {
 
     }
   );
+
 
   navLinks
     .querySelectorAll("a")
