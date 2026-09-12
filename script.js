@@ -32,7 +32,7 @@ const products = [
   {
     id: "PT-001",
     name: "BPC-157 + TB-500 5/5 mg",
-    category: "recovery",
+    category: "Recovery",
     price: 3800,
     description:
       "Research-focused peptide combination.",
@@ -43,7 +43,7 @@ const products = [
   {
     id: "PT-002",
     name: "Retatrutide 10mg",
-    category: "research",
+    category: "Metabolic",
     price: 5000,
     description:
       "Research-focused product.",
@@ -54,7 +54,7 @@ const products = [
   {
     id: "PT-003",
     name: "SLU-PP-332 60 Capsules",
-    category: "research",
+    category: "Metabolic",
     price: 5600,
     description:
       "Research-focused compound.",
@@ -65,7 +65,7 @@ const products = [
   {
     id: "PT-004",
     name: "IGF-1 1mg",
-    category: "research",
+    category: "Performance",
     price: 4600,
     description:
       "Research-focused product.",
@@ -76,7 +76,7 @@ const products = [
   {
     id: "PT-005",
     name: "Retatrutide 20mg",
-    category: "research",
+    category: "Metabolic",
     price: 8500,
     description:
       "Research-focused product.",
