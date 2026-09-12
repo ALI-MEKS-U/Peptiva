@@ -116,6 +116,16 @@ const products = [
     image: "kpv.png"
   }
 
+{
+    id: "PT-009",
+    name: "bacteriostatic water",
+    category: "other",
+    price: 200,
+    description:
+      "Research-focused product.",
+    image: "water.png"
+  },
+  
 ];
 
 
