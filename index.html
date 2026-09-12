@@ -25,32 +25,50 @@
 
     <nav class="nav-links">
 
-      <a href="#home">Home</a>
+      <a href="#home">
+        Home
+      </a>
 
-      <a href="#products">Products</a>
+      <a href="#products">
+        Products
+      </a>
 
-      <a href="#about">About</a>
+      <a href="#about">
+        About
+      </a>
 
-      <a href="#faq">FAQ</a>
+      <a href="#faq">
+        FAQ
+      </a>
+
+      <a href="#contact">
+        Contact
+      </a>
 
     </nav>
 
-    <button
-      class="cart-button"
-      id="cartButton"
-      type="button"
-    >
-      Cart
-      <span id="cartCount">0</span>
-    </button>
+    <div class="nav-actions">
 
-    <button
-      class="menu-button"
-      id="menuButton"
-      type="button"
-    >
-      ☰
-    </button>
+      <button
+        id="cartButton"
+        class="cart-button"
+        type="button"
+      >
+        Cart
+        <span id="cartCount">
+          0
+        </span>
+      </button>
+
+      <button
+        id="menuButton"
+        class="menu-button"
+        type="button"
+      >
+        ☰
+      </button>
+
+    </div>
 
   </div>
 
@@ -62,27 +80,26 @@
 ===================================================== -->
 
 <section
-  class="hero"
   id="home"
+  class="hero"
 >
 
   <div class="container hero-content">
 
     <div class="hero-text">
 
-      <div class="eyebrow">
+      <span class="eyebrow">
         PREMIUM RESEARCH PRODUCTS
-      </div>
+      </span>
 
       <h1>
-        Precision.<br>
-        Quality.<br>
-        Research.
+        Research.<br>
+        Refined.
       </h1>
 
       <p>
-        Explore premium research-focused products from Peptiva,
-        presented with a simple and transparent ordering experience.
+        Discover a premium selection of research-focused
+        products designed for modern research environments.
       </p>
 
       <div class="hero-buttons">
@@ -106,22 +123,25 @@
       <div class="trust-row">
 
         <span>
+          ✓ Premium Selection
+        </span>
+
+        <span>
           ✓ Research Focused
         </span>
 
         <span>
-          ✓ Transparent Ordering
-        </span>
-
-        <span>
-          ✓ Secure Checkout
+          ✓ Secure Ordering
         </span>
 
       </div>
 
     </div>
 
+
     <div class="hero-visual">
+
+      <div class="hero-glow"></div>
 
       <div class="molecule">
 
@@ -132,8 +152,6 @@
         <span></span>
 
       </div>
-
-      <div class="hero-glow"></div>
 
     </div>
 
@@ -147,8 +165,8 @@
 ===================================================== -->
 
 <section
-  class="products-section"
   id="products"
+  class="products-section"
 >
 
   <div class="container">
@@ -156,16 +174,30 @@
     <div class="section-heading">
 
       <span class="eyebrow">
-        PEPTIVA COLLECTION
+        COLLECTION
       </span>
 
       <h2>
-        Research Products
+        Premium Research Products
       </h2>
 
       <p>
-        Browse the available products and add your selection to the cart.
+        Browse our current research-focused selection.
       </p>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+      <input
+        type="search"
+        id="productSearch"
+        placeholder="Search products..."
+        autocomplete="off"
+      >
 
     </div>
 
@@ -192,10 +224,10 @@
 
       <button
         class="filter"
-        data-filter="metabolic"
+        data-filter="research"
         type="button"
       >
-        Metabolic
+        Research
       </button>
 
       <button
@@ -208,10 +240,18 @@
 
       <button
         class="filter"
-        data-filter="research"
+        data-filter="metabolic"
         type="button"
       >
-        Research
+        Metabolic
+      </button>
+
+      <button
+        class="filter"
+        data-filter="other"
+        type="button"
+      >
+        Other
       </button>
 
     </div>
@@ -234,8 +274,8 @@
 ===================================================== -->
 
 <section
-  class="about-section"
   id="about"
+  class="about-section"
 >
 
   <div class="container">
@@ -247,41 +287,28 @@
       </span>
 
       <h2>
-        Built Around Research.
+        Built for Modern Research
       </h2>
 
       <p>
-        Peptiva provides research-focused products through a
-        straightforward online ordering experience.
+        Peptiva provides a curated research-focused
+        product experience with a premium digital storefront.
       </p>
 
     </div>
+
 
     <div class="about-grid">
 
       <div class="about-card">
 
         <h3>
-          Quality
+          Premium Selection
         </h3>
 
         <p>
-          Products are presented with clear product information
-          and transparent ordering details.
-        </p>
-
-      </div>
-
-
-      <div class="about-card">
-
-        <h3>
-          Transparency
-        </h3>
-
-        <p>
-          Customers can review their cart and order information
-          before submitting an order.
+          Carefully presented products with a clean,
+          premium shopping experience.
         </p>
 
       </div>
@@ -294,8 +321,22 @@
         </h3>
 
         <p>
-          Products are presented for research-focused purposes
-          and are not marketed as approved treatments.
+          Products are presented for laboratory and
+          research purposes only.
+        </p>
+
+      </div>
+
+
+      <div class="about-card">
+
+        <h3>
+          Simple Ordering
+        </h3>
+
+        <p>
+          Add products to your cart and complete your
+          order through the secure checkout flow.
         </p>
 
       </div>
@@ -312,8 +353,8 @@
 ===================================================== -->
 
 <section
-  class="faq-section"
   id="faq"
+  class="faq-section"
 >
 
   <div class="container">
@@ -336,12 +377,12 @@
       <details>
 
         <summary>
-          What are these products?
+          What are these products for?
         </summary>
 
         <p>
-          They are presented as research-focused products.
-          They are not approved medical treatments.
+          Products are presented for research purposes
+          only and are not intended for human consumption.
         </p>
 
       </details>
@@ -350,13 +391,13 @@
       <details>
 
         <summary>
-          How do I place an order?
+          How can I place an order?
         </summary>
 
         <p>
-          Add products to your cart, complete checkout,
-          make the InstaPay transfer, then enter your
-          transaction reference.
+          Add your selected products to the cart,
+          continue to checkout, complete the requested
+          information and submit your order.
         </p>
 
       </details>
@@ -365,12 +406,12 @@
       <details>
 
         <summary>
-          How does InstaPay payment work?
+          How do I pay?
         </summary>
 
         <p>
-          Your order will show the InstaPay payment information
-          and total amount before confirmation.
+          Payment is available through InstaPay.
+          Follow the instructions shown during checkout.
         </p>
 
       </details>
@@ -379,12 +420,12 @@
       <details>
 
         <summary>
-          Is my order automatically marked as paid?
+          How do I contact Peptiva?
         </summary>
 
         <p>
-          No. Orders are initially marked Pending Payment.
-          Payment must be manually verified.
+          Use the contact section or the available
+          communication channels for more information.
         </p>
 
       </details>
@@ -397,64 +438,86 @@
 
 
 <!-- =====================================================
-     PRODUCT DETAILS MODAL
+     CONTACT
+===================================================== -->
+
+<section
+  id="contact"
+  class="contact-section"
+>
+
+  <div class="container">
+
+    <div class="section-heading">
+
+      <span class="eyebrow">
+        CONTACT
+      </span>
+
+      <h2>
+        Get In Touch
+      </h2>
+
+      <p>
+        Contact Peptiva for product information and order
+        assistance.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PRODUCT MODAL
 ===================================================== -->
 
 <div
-  class="overlay"
   id="productModal"
+  class="overlay"
 >
 
   <div class="product-modal">
 
-    <!-- CLOSE -->
-
     <button
-      class="product-modal-close"
       id="closeProductModal"
+      class="product-modal-close"
       type="button"
-      aria-label="Close"
     >
       ×
     </button>
 
-
-    <!-- PRODUCT IMAGE -->
 
     <div class="product-modal-image">
 
       <img
         id="modalProductImage"
         src=""
-        alt="Product"
+        alt=""
       >
 
     </div>
 
 
-    <!-- PRODUCT INFO -->
-
     <div class="product-modal-info">
 
       <span
-        class="research-badge"
         id="modalProductCategory"
+        class="research-badge"
       >
-        RESEARCH PRODUCT
+        RESEARCH
       </span>
 
-
       <h2 id="modalProductName">
-        Product Name
+        Product
       </h2>
 
-
       <p id="modalProductDescription">
-        Product description.
+        Product information.
       </p>
 
-
-      <!-- PRICE -->
 
       <div class="product-modal-price">
 
@@ -469,47 +532,38 @@
       </div>
 
 
-      <!-- HOW IT WORKS -->
-
-      <div
-        class="product-how"
-        id="modalProductHowSection"
-      >
+      <div class="product-how">
 
         <h3>
-          How It Works
+          How it works
         </h3>
 
-        <p id="modalProductHow">
-          Research information will appear here.
+        <p>
+          This product is presented for research use.
+          Consult appropriate scientific documentation
+          and laboratory protocols before use.
         </p>
 
       </div>
 
 
-      <!-- PRODUCT DETAILS -->
-
-      <div
-        class="product-details"
-        id="modalProductDetailsSection"
-      >
+      <div class="product-details">
 
         <h3>
-          Product Details
+          Research Information
         </h3>
 
-        <p id="modalProductDetails">
-          Product details will appear here.
+        <p>
+          For laboratory research purposes only.
+          Not intended for human or veterinary use.
         </p>
 
       </div>
 
-
-      <!-- ADD TO CART -->
 
       <button
-        class="btn primary full"
         id="modalAddToCart"
+        class="btn primary full"
         type="button"
       >
         Add to Cart
@@ -527,8 +581,8 @@
 ===================================================== -->
 
 <div
-  class="overlay"
   id="cartOverlay"
+  class="overlay"
 >
 
   <div class="side-panel">
@@ -569,7 +623,6 @@
 
       </div>
 
-
       <button
         id="checkoutButton"
         class="btn primary full"
@@ -590,8 +643,8 @@
 ===================================================== -->
 
 <div
-  class="overlay"
   id="checkoutOverlay"
+  class="overlay"
 >
 
   <div class="checkout-panel">
@@ -614,8 +667,7 @@
 
     <form id="orderForm">
 
-
-      <!-- FULL NAME -->
+      <!-- CUSTOMER NAME -->
 
       <label>
 
@@ -624,8 +676,9 @@
         <input
           type="text"
           id="customerName"
+          name="customerName"
+          placeholder="Your full name"
           required
-          placeholder="Your name"
         >
 
       </label>
@@ -635,13 +688,14 @@
 
       <label>
 
-        Phone
+        Phone Number
 
         <input
           type="tel"
           id="customerPhone"
+          name="customerPhone"
+          placeholder="Your phone number"
           required
-          placeholder="01XXXXXXXXX"
         >
 
       </label>
@@ -656,8 +710,9 @@
         <input
           type="text"
           id="customerCity"
+          name="customerCity"
+          placeholder="Your city"
           required
-          placeholder="Cairo"
         >
 
       </label>
@@ -671,19 +726,46 @@
 
         <textarea
           id="customerNotes"
-          placeholder="Optional notes"
+          name="customerNotes"
+          placeholder="Order notes..."
         ></textarea>
 
       </label>
 
 
-      <!-- INSTAPAY -->
+      <!-- =================================================
+           INSTAPAY
+      ================================================== -->
 
       <div class="payment-box">
 
         <div class="payment-title">
           Pay with InstaPay
         </div>
+
+
+        <!-- QR CODE -->
+
+        <div class="instapay-qr">
+
+          <img
+            src="qr pay.jpeg"
+            alt="Peptiva InstaPay QR Code"
+          >
+
+        </div>
+
+
+        <!-- INSTAPAY LINK -->
+
+        <a
+          href="https://ipn.eg/S/alimekwy08/instapay/4bRNlE"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="instapay-button"
+        >
+          Open InstaPay
+        </a>
 
 
         <div class="payment-info">
@@ -695,7 +777,7 @@
             </span>
 
             <strong>
-              5484460053029716
+              alimekwy08@instapay
             </strong>
 
           </div>
@@ -719,11 +801,11 @@
         <div class="payment-instructions">
 
           <p>
-            1. Transfer the exact amount using InstaPay.
+            1. Scan the QR code or open the InstaPay link.
           </p>
 
           <p>
-            2. Complete the transfer before submitting the order.
+            2. Transfer the exact amount shown above.
           </p>
 
           <p>
@@ -735,7 +817,9 @@
       </div>
 
 
-      <!-- TRANSACTION REFERENCE -->
+      <!-- =================================================
+           TRANSACTION REFERENCE
+      ================================================== -->
 
       <label>
 
@@ -744,27 +828,25 @@
         <input
           type="text"
           id="transactionReference"
-          required
+          name="transactionReference"
           placeholder="Enter transaction reference"
+          required
         >
 
       </label>
 
 
-      <!-- PAYMENT WARNING -->
-
       <div class="payment-warning">
 
-        ⚠️ Your order will remain
         <strong>
-          Pending Payment
+          Important:
         </strong>
-        until the payment is manually verified.
+
+        Please make sure the transferred amount matches
+        the checkout total before submitting your order.
 
       </div>
 
-
-      <!-- SUBMIT -->
 
       <button
         type="submit"
@@ -772,7 +854,6 @@
       >
         Confirm Order
       </button>
-
 
     </form>
 
@@ -786,8 +867,8 @@
 ===================================================== -->
 
 <div
-  class="overlay"
   id="successOverlay"
+  class="overlay"
 >
 
   <div class="success-panel">
@@ -796,15 +877,12 @@
       ✓
     </div>
 
-
     <h2>
       Order Submitted
     </h2>
 
-
     <p>
-      Your order has been received and is currently
-      pending payment verification.
+      Your order has been submitted successfully.
     </p>
 
 
@@ -812,14 +890,16 @@
 
       Order ID:
 
-      <strong id="successOrderId"></strong>
+      <strong id="successOrderId">
+        -
+      </strong>
 
     </div>
 
 
     <button
       id="closeSuccess"
-      class="btn primary"
+      class="btn primary full"
       type="button"
     >
       Done
@@ -845,7 +925,7 @@
       </strong>
 
       <p>
-        Premium research products.
+        Premium Research Products
       </p>
 
     </div>
@@ -853,9 +933,8 @@
 
     <div class="footer-disclaimer">
 
-      Products displayed on this website are presented
-      for research-focused purposes only and are not
-      approved treatments or professional medical advice.
+      For research purposes only.
+      Products are not intended for human or veterinary use.
 
     </div>
 
@@ -865,7 +944,7 @@
 
 
 <!-- =====================================================
-     JAVASCRIPT
+     SCRIPT
 ===================================================== -->
 
 <script src="script.js"></script>
