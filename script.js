@@ -44,7 +44,7 @@ const products = [
     id: "PT-002",
     name: "Retatrutide 10mg",
     category: "research",
-    price: 4600,
+    price: 5000,
     description:
       "Research-focused product.",
     image: "RETA10MG.png"
@@ -55,7 +55,7 @@ const products = [
     id: "PT-003",
     name: "SLU-PP-332 60 Capsules",
     category: "research",
-    price: 4600,
+    price: 5600,
     description:
       "Research-focused compound.",
     image: "SLU.png"
