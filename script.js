@@ -22,7 +22,6 @@ const INSTAPAY_NUMBER =
 const INSTAPAY_LINK =
   "https://ipn.eg/S/alimekwy08/instapay/4bRNlE";
 
-
 // =====================================================
 // PRODUCTS
 // =====================================================
@@ -32,57 +31,52 @@ const products = [
   {
     id: "PT-001",
     name: "BPC-157 + TB-500 5/5 mg",
-    category: "Recovery",
+    category: "recovery",
     price: 3800,
     description:
       "Research-focused peptide combination.",
     image: "BPC VIAL.png"
   },
 
-
   {
     id: "PT-002",
     name: "Retatrutide 10mg",
-    category: "Metabolic",
+    category: "metabolic",
     price: 5000,
     description:
       "Research-focused product.",
     image: "RETA10MG.png"
   },
 
-
   {
     id: "PT-003",
     name: "SLU-PP-332 60 Capsules",
-    category: "Metabolic",
+    category: "metabolic",
     price: 5600,
     description:
       "Research-focused compound.",
     image: "SLU.png"
   },
 
-
   {
     id: "PT-004",
     name: "IGF-1 1mg",
-    category: "Performance",
+    category: "performance",
     price: 4600,
     description:
       "Research-focused product.",
     image: "igf1.png"
   },
 
-
   {
     id: "PT-005",
     name: "Retatrutide 20mg",
-    category: "Metabolic",
+    category: "metabolic",
     price: 8500,
     description:
       "Research-focused product.",
     image: "RETA10MG.png"
   },
-
 
   {
     id: "PT-006",
@@ -94,7 +88,6 @@ const products = [
     image: "TRIZ VIAL.png"
   },
 
-
   {
     id: "PT-007",
     name: "GHK-CU 50mg",
@@ -105,7 +98,6 @@ const products = [
     image: "GHK.png"
   },
 
-
   {
     id: "PT-008",
     name: "KPV 10mg",
@@ -114,11 +106,19 @@ const products = [
     description:
       "Research-focused peptide product.",
     image: "kpv.png"
+  },
+
+  {
+    id: "PT-009",
+    name: "Bacteriostatic Water",
+    category: "other",
+    price: 200,
+    description:
+      "Bacteriostatic water product.",
+    image: "water.png"
   }
 
-  
 ];
-
 
 // =====================================================
 // CART
