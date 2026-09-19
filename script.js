@@ -8,7 +8,7 @@
 // =====================================================
 
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzbrR6dZI7aMHuqDHF5AQkd3id5UhrnDPrAPhgryURTHKo6Y2wzuXKJECG0Ct912jpc/exec";
+  "https://script.google.com/macros/s/AKfycbwgSxYuLxk6bErFBDPh0jf93XgD9t9xWIJdxUPUEDTS98WtOBhXGbdN0AR58wiSnrA7FQ/exec";
 
 
 // =====================================================
@@ -16,11 +16,8 @@ const GOOGLE_SCRIPT_URL =
 // =====================================================
 
 const INSTAPAY_NUMBER =
-  "alimekwy08@instapay";
+  "01277728571";
 
-
-const INSTAPAY_LINK =
-  "https://ipn.eg/S/alimekwy08/instapay/4bRNlE";
 
 // =====================================================
 // PRODUCTS
@@ -33,48 +30,43 @@ const products = [
     name: "BPC-157 + TB-500 5/5 mg",
     category: "recovery",
     price: 3800,
-    description:
-      "Research-focused peptide combination.",
+    description: "Research-focused peptide combination.",
     image: "BPC VIAL.png"
   },
 
   {
     id: "PT-002",
     name: "Retatrutide 10mg",
-    category: "metabolic",
-    price: 5000,
-    description:
-      "Research-focused product.",
+    category: "research",
+    price: 4600,
+    description: "Research-focused product.",
     image: "RETA10MG.png"
   },
 
   {
     id: "PT-003",
     name: "SLU-PP-332 60 Capsules",
-    category: "metabolic",
-    price: 5600,
-    description:
-      "Research-focused compound.",
+    category: "research",
+    price: 4600,
+    description: "Research-focused compound.",
     image: "SLU.png"
   },
 
   {
     id: "PT-004",
     name: "IGF-1 1mg",
-    category: "performance",
+    category: "research",
     price: 4600,
-    description:
-      "Research-focused product.",
+    description: "Research-focused product.",
     image: "igf1.png"
   },
 
   {
     id: "PT-005",
     name: "Retatrutide 20mg",
-    category: "metabolic",
+    category: "research",
     price: 8500,
-    description:
-      "Research-focused product.",
+    description: "Research-focused product.",
     image: "RETA10MG.png"
   },
 
@@ -83,8 +75,7 @@ const products = [
     name: "Trizpetide 60mg",
     category: "other",
     price: 8400,
-    description:
-      "Research-focused product.",
+    description: "Research-focused product.",
     image: "TRIZ VIAL.png"
   },
 
@@ -93,8 +84,7 @@ const products = [
     name: "GHK-CU 50mg",
     category: "research",
     price: 6000,
-    description:
-      "Research-focused product.",
+    description: "Research-focused product.",
     image: "GHK.png"
   },
 
@@ -103,22 +93,25 @@ const products = [
     name: "KPV 10mg",
     category: "research",
     price: 4800,
-    description:
-      "Research-focused peptide product.",
+    description: "Research-focused peptide product.",
     image: "kpv.png"
   },
 
+  // ===================================================
+  // NEW PRODUCT — MOTS-c
+  // ===================================================
+
   {
     id: "PT-009",
-    name: "Bacteriostatic Water",
-    category: "other",
-    price: 200,
-    description:
-      "Bacteriostatic water product.",
-    image: "water.png"
+    name: "MOTS-c 10mg",
+    category: "research",
+    price: 5600,
+    description: "Research-focused peptide product.",
+    image: "mots c.png"
   }
 
 ];
+
 
 // =====================================================
 // CART
@@ -126,9 +119,7 @@ const products = [
 
 let cart =
   JSON.parse(
-    localStorage.getItem(
-      "peptidesCart"
-    )
+    localStorage.getItem("peptidesCart")
   ) || [];
 
 
@@ -171,15 +162,12 @@ document.addEventListener(
 // RENDER PRODUCTS
 // =====================================================
 
-function renderProducts(
-  category = "all"
-) {
+function renderProducts(category = "all") {
 
   const grid =
     document.getElementById(
       "productsGrid"
     );
-
 
   if (!grid) return;
 
@@ -206,8 +194,7 @@ function renderProducts(
       ? products
       : products.filter(
           product =>
-            product.category ===
-            category
+            product.category === category
         );
 
 
@@ -224,11 +211,10 @@ function renderProducts(
   }
 
 
-  if (
-    filteredProducts.length === 0
-  ) {
+  if (filteredProducts.length === 0) {
 
     grid.innerHTML = `
+
       <div class="no-products">
 
         <h3>
@@ -240,6 +226,7 @@ function renderProducts(
         </p>
 
       </div>
+
     `;
 
     return;
@@ -279,15 +266,16 @@ function renderProducts(
 
         `;
 
-      }
-      else {
+      } else {
 
         imageHTML = `
 
           <div class="product-image">
 
             <div class="product-placeholder">
+
               ${product.name.charAt(0)}
+
             </div>
 
           </div>
@@ -305,33 +293,42 @@ function renderProducts(
         <div class="product-info">
 
           <div class="product-category">
+
             ${product.category}
+
           </div>
 
 
           <h3>
+
             ${product.name}
+
           </h3>
 
 
           <p>
+
             ${product.description}
+
           </p>
 
 
           <div class="product-bottom">
 
             <strong>
+
               EGP ${formatPrice(product.price)}
+
             </strong>
 
 
             <button
               class="add-button"
               data-id="${product.id}"
-              type="button"
             >
+
               Add to Cart
+
             </button>
 
           </div>
@@ -343,6 +340,10 @@ function renderProducts(
 
       grid.appendChild(card);
 
+
+      // =================================================
+      // CARD CLICK
+      // =================================================
 
       card.addEventListener(
         "click",
@@ -369,6 +370,10 @@ function renderProducts(
     }
   );
 
+
+  // =====================================================
+  // ADD BUTTONS
+  // =====================================================
 
   document
     .querySelectorAll(
@@ -505,22 +510,17 @@ function addToCart(
 
     existing.quantity += 1;
 
-  }
-  else {
+  } else {
 
     cart.push({
 
-      id:
-        product.id,
+      id: product.id,
 
-      name:
-        product.name,
+      name: product.name,
 
-      price:
-        product.price,
+      price: product.price,
 
-      quantity:
-        1
+      quantity: 1
 
     });
 
@@ -559,7 +559,7 @@ function removeFromCart(
 
 
 // =====================================================
-// CHANGE QUANTITY
+// QUANTITY
 // =====================================================
 
 function changeQuantity(
@@ -613,24 +613,16 @@ function saveCart() {
 
 
 // =====================================================
-// CART TOTAL
+// TOTAL
 // =====================================================
 
 function getCartTotal() {
 
   return cart.reduce(
-    (
-      total,
-      item
-    ) => {
-
-      return (
-        total +
-        item.price *
-        item.quantity
-      );
-
-    },
+    (total, item) =>
+      total +
+      item.price *
+      item.quantity,
     0
   );
 
@@ -638,23 +630,15 @@ function getCartTotal() {
 
 
 // =====================================================
-// CART COUNT
+// COUNT
 // =====================================================
 
 function getCartCount() {
 
   return cart.reduce(
-    (
-      total,
-      item
-    ) => {
-
-      return (
-        total +
-        item.quantity
-      );
-
-    },
+    (total, item) =>
+      total +
+      item.quantity,
     0
   );
 
@@ -780,7 +764,6 @@ function updateCart() {
             class="quantity-button"
             data-action="minus"
             data-id="${item.id}"
-            type="button"
           >
             −
           </button>
@@ -795,7 +778,6 @@ function updateCart() {
             class="quantity-button"
             data-action="plus"
             data-id="${item.id}"
-            type="button"
           >
             +
           </button>
@@ -804,7 +786,6 @@ function updateCart() {
           <button
             class="remove-button"
             data-id="${item.id}"
-            type="button"
           >
             ×
           </button>
@@ -926,9 +907,7 @@ function setupCart() {
       "click",
       () => {
 
-        if (
-          cart.length === 0
-        ) {
+        if (cart.length === 0) {
 
           alert(
             "Your cart is empty."
@@ -1244,9 +1223,7 @@ function setupCheckout() {
       event.preventDefault();
 
 
-      if (
-        cart.length === 0
-      ) {
+      if (cart.length === 0) {
 
         alert(
           "Your cart is empty."
@@ -1302,9 +1279,7 @@ function setupCheckout() {
           .trim();
 
 
-      if (
-        !transactionReference
-      ) {
+      if (!transactionReference) {
 
         alert(
           "Please enter your InstaPay transaction reference."
@@ -1333,9 +1308,6 @@ function setupCheckout() {
 
         payment_account:
           INSTAPAY_NUMBER,
-
-        payment_link:
-          INSTAPAY_LINK,
 
         payment_reference:
           transactionReference,
@@ -1412,18 +1384,16 @@ function setupCheckout() {
 
         updateCart();
 
-
         form.reset();
 
-
         closeCheckout();
-
 
         showSuccess(
           orderId
         );
 
       }
+
       catch (error) {
 
         console.error(
@@ -1456,7 +1426,7 @@ function setupCheckout() {
 
 
 // =====================================================
-// GOOGLE SHEETS
+// SEND TO GOOGLE SHEETS
 // =====================================================
 
 async function sendOrderToGoogleSheets(
@@ -1492,7 +1462,7 @@ async function sendOrderToGoogleSheets(
 
 
 // =====================================================
-// SAVE ORDER LOCALLY
+// LOCAL ORDER
 // =====================================================
 
 function saveOrderLocally(
@@ -1523,6 +1493,29 @@ function saveOrderLocally(
 
 
 // =====================================================
+// CLOSE CHECKOUT
+// =====================================================
+
+function closeCheckout() {
+
+  const overlay =
+    document.getElementById(
+      "checkoutOverlay"
+    );
+
+
+  if (overlay) {
+
+    overlay.classList.remove(
+      "active"
+    );
+
+  }
+
+}
+
+
+// =====================================================
 // OPEN CHECKOUT
 // =====================================================
 
@@ -1540,29 +1533,6 @@ function openCheckout() {
   if (overlay) {
 
     overlay.classList.add(
-      "active"
-    );
-
-  }
-
-}
-
-
-// =====================================================
-// CLOSE CHECKOUT
-// =====================================================
-
-function closeCheckout() {
-
-  const overlay =
-    document.getElementById(
-      "checkoutOverlay"
-    );
-
-
-  if (overlay) {
-
-    overlay.classList.remove(
       "active"
     );
 
