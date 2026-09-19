@@ -9,8 +9,7 @@
 // =====================================================
 
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwgSxYuLxk6bErFBDPh0jf93XgD9t9xWIJdxUPUEDTS98wiSnrA7FQ/exec";
-
+  "https://script.google.com/macros/s/AKfycbzbrR6dZI7aMHuqDHF5AQkd3id5UhrnDPrAPhgryURTHKo6Y2wzuXKJECG0Ct912jpc/exec";
 
 // =====================================================
 // INSTAPAY
