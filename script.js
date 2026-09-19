@@ -2368,62 +2368,45 @@ function escapeHTML(
 // SMOOTH NAVIGATION
 // =====================================================
 
-document.addEventListener(
-  "click",
-  function (event) {
+function initPeptiva() {
 
-    const link =
-      event.target.closest(
-        'a[href^="#"]'
-      );
+  console.log("PEPTIVA: INIT START");
 
+  console.log(
+    "productsGrid:",
+    document.getElementById("productsGrid")
+  );
 
-    if (!link) {
-      return;
-    }
+  console.log(
+    "Products:",
+    products.length
+  );
 
+  renderProducts();
+  updateCart();
 
-    const targetId =
-      link.getAttribute(
-        "href"
-      );
+  setupCart();
+  setupCheckout();
+  setupMobileMenu();
+  setupFilters();
+  setupSearch();
+  setupModal();
+  setupSuccess();
+  setupGlobalEvents();
 
-
-    if (
-      !targetId ||
-      targetId === "#"
-    ) {
-      return;
-    }
-
-
-    const target =
-      document.querySelector(
-        targetId
-      );
+  console.log("PEPTIVA: INIT COMPLETE");
+}
 
 
-    if (!target) {
-      return;
-    }
+if (document.readyState === "loading") {
 
+  document.addEventListener(
+    "DOMContentLoaded",
+    initPeptiva
+  );
 
-    event.preventDefault();
+} else {
 
+  initPeptiva();
 
-    target.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-
-  }
-);
-
-
-// =====================================================
-// PEPTIVA READY
-// =====================================================
-
-console.log(
-  "PEPTIVA: script.js loaded successfully."
-);
+}
