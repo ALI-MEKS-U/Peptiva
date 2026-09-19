@@ -1,5 +1,6 @@
 // =====================================================
-// PEPTIVA
+// PEPTIVA — SCRIPT.JS
+// CART + PRODUCTS + CHECKOUT + GOOGLE SHEETS DIAGNOSTIC
 // =====================================================
 
 
@@ -8,7 +9,7 @@
 // =====================================================
 
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwgSxYuLxk6bErFBDPh0jf93XgD9t9xWIJdxUPUEDTS98WtOBhXGbdN0AR58wiSnrA7FQ/exec";
+  "https://script.google.com/macros/s/AKfycbwgSxYuLxk6bErFBDPh0jf93XgD9t9xWIJdxUPUEDTS98wiSnrA7FQ/exec";
 
 
 // =====================================================
@@ -27,87 +28,119 @@ const products = [
 
   {
     id: "PT-001",
-    name: "BPC-157 + TB-500 5/5 mg",
+    name: "BPC-157 + TB-500",
+    subtitle: "5/5 MG",
     category: "recovery",
     price: 3800,
-    description: "Research-focused peptide combination.",
-    image: "BPC VIAL.png"
+    image: "images/BPC VIAL.png",
+    description:
+      "Research peptide combination for laboratory research.",
+    howItWorks:
+      "BPC-157 and TB-500 are studied in research settings for cellular and tissue-related processes."
   },
 
   {
     id: "PT-002",
-    name: "Retatrutide 10mg",
+    name: "Retatrutide",
+    subtitle: "10 MG",
     category: "research",
     price: 4600,
-    description: "Research-focused product.",
-    image: "RETA10MG.png"
+    image: "images/RETA10MG.png",
+    description:
+      "Research compound supplied for laboratory research purposes.",
+    howItWorks:
+      "Retatrutide is being studied for its activity across multiple metabolic hormone pathways."
   },
 
   {
     id: "PT-003",
-    name: "SLU-PP-332 60 Capsules",
+    name: "SLU-PP-332",
+    subtitle: "60 Capsules",
     category: "research",
     price: 4600,
-    description: "Research-focused compound.",
-    image: "SLU.png"
+    image: "images/SLU.png",
+    description:
+      "Research compound supplied for laboratory research purposes.",
+    howItWorks:
+      "SLU-PP-332 is studied in preclinical research involving metabolic pathways."
   },
 
   {
     id: "PT-004",
-    name: "IGF-1 1mg",
+    name: "IGF-1",
+    subtitle: "1 MG",
     category: "research",
     price: 4600,
-    description: "Research-focused product.",
-    image: "igf1.png"
+    image: "images/igf1.png",
+    description:
+      "Research material supplied for laboratory research.",
+    howItWorks:
+      "IGF-1 is studied in research involving growth-factor signaling pathways."
   },
 
   {
     id: "PT-005",
-    name: "Retatrutide 20mg",
+    name: "Retatrutide",
+    subtitle: "20 MG",
     category: "research",
     price: 8500,
-    description: "Research-focused product.",
-    image: "RETA10MG.png"
+    image: "images/RETA10MG.png",
+    description:
+      "Research compound supplied for laboratory research purposes.",
+    howItWorks:
+      "Retatrutide is being studied for activity across multiple metabolic hormone pathways."
   },
 
   {
     id: "PT-006",
-    name: "Trizpetide 60mg",
+    name: "Trizpetide",
+    subtitle: "60 MG",
     category: "other",
     price: 8400,
-    description: "Research-focused product.",
-    image: "TRIZ VIAL.png"
+    image: "images/TRIZ VIAL.png",
+    description:
+      "Research compound supplied for laboratory research purposes.",
+    howItWorks:
+      "This compound is provided for research and laboratory use."
   },
 
   {
     id: "PT-007",
-    name: "GHK-CU 50mg",
+    name: "GHK-CU",
+    subtitle: "50 MG",
     category: "research",
     price: 6000,
-    description: "Research-focused product.",
-    image: "GHK.png"
+    image: "images/GHK.png",
+    description:
+      "Copper peptide supplied for laboratory research.",
+    howItWorks:
+      "GHK-Cu is studied in research involving copper-binding peptide activity."
   },
 
   {
     id: "PT-008",
-    name: "KPV 10mg",
+    name: "KPV",
+    subtitle: "10 MG",
     category: "research",
     price: 4800,
-    description: "Research-focused peptide product.",
-    image: "kpv.png"
+    image: "images/kpv.png",
+    description:
+      "Research peptide supplied for laboratory research.",
+    howItWorks:
+      "KPV is studied in laboratory research involving peptide signaling."
   },
-
-  // ===================================================
-  // NEW PRODUCT — MOTS-c
-  // ===================================================
 
   {
     id: "PT-009",
-    name: "MOTS-c 10mg",
+    name: "MOTS-c",
+    subtitle: "10 MG",
     category: "research",
     price: 5600,
-    description: "Research-focused peptide product.",
-    image: "mots c.png"
+    image: "images/mots c.png",
+    description:
+      "Research peptide supplied for laboratory research.",
+    howItWorks:
+      "MOTS-c is studied in preclinical research involving cellular and metabolic pathways."
   }
 
 ];
@@ -124,359 +157,248 @@ let cart =
 
 
 // =====================================================
-// SELECTED PRODUCT
+// DOM ELEMENTS
 // =====================================================
 
-let selectedProduct = null;
+const cartButton =
+  document.getElementById("cartButton");
+
+const cartCount =
+  document.getElementById("cartCount");
+
+const cartOverlay =
+  document.getElementById("overlay");
+
+const cartPanel =
+  document.getElementById("cartPanel");
+
+const cartItems =
+  document.getElementById("cartItems");
+
+const cartTotal =
+  document.getElementById("cartTotal");
+
+const checkoutPanel =
+  document.getElementById("checkoutPanel");
+
+const checkoutForm =
+  document.getElementById("checkoutForm");
+
+const successOverlay =
+  document.getElementById("successOverlay");
+
+const orderIdElement =
+  document.getElementById("orderId");
 
 
 // =====================================================
-// START
+// INITIALIZE
 // =====================================================
 
 document.addEventListener(
   "DOMContentLoaded",
-  () => {
+  function () {
 
-    renderProducts("all");
+    console.log(
+      "PEPTIVA: Website initialized."
+    );
+
+    console.log(
+      "PEPTIVA: Products loaded:",
+      products.length
+    );
+
+    console.log(
+      "PEPTIVA: Google Sheets URL:",
+      GOOGLE_SCRIPT_URL
+    );
 
     updateCart();
+
+    setupProductButtons();
+
+    setupCheckout();
+
+    setupMobileMenu();
 
     setupFilters();
 
     setupSearch();
 
-    setupCart();
-
-    setupCheckout();
-
-    setupProductModal();
-
-    setupMobileMenu();
+    setupModal();
 
   }
 );
 
 
 // =====================================================
-// RENDER PRODUCTS
+// LOCAL STORAGE
 // =====================================================
 
-function renderProducts(category = "all") {
+function saveCart() {
 
-  const grid =
-    document.getElementById(
-      "productsGrid"
-    );
+  localStorage.setItem(
+    "peptidesCart",
+    JSON.stringify(cart)
+  );
 
-  if (!grid) return;
-
-
-  grid.innerHTML = "";
+}
 
 
-  const searchInput =
-    document.getElementById(
-      "productSearch"
-    );
+function saveOrderLocally(orderData) {
+
+  const orders =
+    JSON.parse(
+      localStorage.getItem("peptidesOrders")
+    ) || [];
+
+  orders.push(orderData);
+
+  localStorage.setItem(
+    "peptidesOrders",
+    JSON.stringify(orders)
+  );
+
+}
 
 
-  const searchTerm =
-    searchInput
-      ? searchInput.value
-          .trim()
-          .toLowerCase()
-      : "";
+// =====================================================
+// CART TOTAL
+// =====================================================
 
+function getCartTotal() {
 
-  let filteredProducts =
-    category === "all"
-      ? products
-      : products.filter(
-          product =>
-            product.category === category
-        );
+  return cart.reduce(
+    function (total, item) {
 
-
-  if (searchTerm) {
-
-    filteredProducts =
-      filteredProducts.filter(
-        product =>
-          product.name
-            .toLowerCase()
-            .includes(searchTerm)
+      return (
+        total +
+        Number(item.price) *
+        Number(item.quantity)
       );
 
+    },
+    0
+  );
+
+}
+
+
+// =====================================================
+// UPDATE CART
+// =====================================================
+
+function updateCart() {
+
+  if (cartCount) {
+
+    const count =
+      cart.reduce(
+        function (total, item) {
+
+          return (
+            total +
+            Number(item.quantity)
+          );
+
+        },
+        0
+      );
+
+    cartCount.textContent =
+      count;
+
   }
 
 
-  if (filteredProducts.length === 0) {
+  if (cartItems) {
 
-    grid.innerHTML = `
+    if (cart.length === 0) {
 
-      <div class="no-products">
-
-        <h3>
-          No products found
-        </h3>
-
-        <p>
-          Try another search.
-        </p>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  filteredProducts.forEach(
-    product => {
-
-      const card =
-        document.createElement(
-          "div"
-        );
-
-
-      card.className =
-        "product-card";
-
-
-      let imageHTML = "";
-
-
-      if (product.image) {
-
-        imageHTML = `
-
-          <div class="product-image">
-
-            <img
-              src="${product.image}"
-              alt="${product.name}"
-              class="product-vial"
-            >
-
-          </div>
-
-        `;
-
-      } else {
-
-        imageHTML = `
-
-          <div class="product-image">
-
-            <div class="product-placeholder">
-
-              ${product.name.charAt(0)}
-
-            </div>
-
-          </div>
-
-        `;
-
-      }
-
-
-      card.innerHTML = `
-
-        ${imageHTML}
-
-
-        <div class="product-info">
-
-          <div class="product-category">
-
-            ${product.category}
-
-          </div>
-
-
-          <h3>
-
-            ${product.name}
-
-          </h3>
-
-
-          <p>
-
-            ${product.description}
-
-          </p>
-
-
-          <div class="product-bottom">
-
-            <strong>
-
-              EGP ${formatPrice(product.price)}
-
-            </strong>
-
-
-            <button
-              class="add-button"
-              data-id="${product.id}"
-            >
-
-              Add to Cart
-
-            </button>
-
-          </div>
-
+      cartItems.innerHTML = `
+        <div class="empty-cart">
+          <p>Your cart is empty.</p>
         </div>
-
       `;
 
+    } else {
 
-      grid.appendChild(card);
+      cartItems.innerHTML =
+        cart.map(
+          function (item, index) {
 
+            return `
+              <div class="cart-item">
 
-      // =================================================
-      // CARD CLICK
-      // =================================================
+                <img
+                  src="${item.image}"
+                  alt="${item.name}"
+                  class="cart-item-image"
+                >
 
-      card.addEventListener(
-        "click",
-        event => {
+                <div class="cart-item-info">
 
-          if (
-            event.target.closest(
-              ".add-button"
-            )
-          ) {
+                  <h4>
+                    ${item.name}
+                  </h4>
 
-            return;
+                  <p>
+                    ${item.subtitle || ""}
+                  </p>
+
+                  <strong>
+                    ${Number(item.price).toLocaleString()} EGP
+                  </strong>
+
+                  <div class="cart-controls">
+
+                    <button
+                      type="button"
+                      onclick="decreaseQuantity(${index})"
+                    >
+                      −
+                    </button>
+
+                    <span>
+                      ${item.quantity}
+                    </span>
+
+                    <button
+                      type="button"
+                      onclick="increaseQuantity(${index})"
+                    >
+                      +
+                    </button>
+
+                  </div>
+
+                  <button
+                    type="button"
+                    class="remove-item"
+                    onclick="removeFromCart(${index})"
+                  >
+                    Remove
+                  </button>
+
+                </div>
+
+              </div>
+            `;
 
           }
-
-
-          openProductModal(
-            product
-          );
-
-        }
-      );
+        ).join("");
 
     }
-  );
+
+  }
 
 
-  // =====================================================
-  // ADD BUTTONS
-  // =====================================================
+  if (cartTotal) {
 
-  document
-    .querySelectorAll(
-      ".add-button"
-    )
-    .forEach(
-      button => {
+    cartTotal.textContent =
+      `${getCartTotal().toLocaleString()} EGP`;
 
-        button.addEventListener(
-          "click",
-          () => {
-
-            addToCart(
-              button.dataset.id
-            );
-
-          }
-        );
-
-      }
-    );
-
-}
-
-
-// =====================================================
-// SEARCH
-// =====================================================
-
-function setupSearch() {
-
-  const search =
-    document.getElementById(
-      "productSearch"
-    );
-
-
-  if (!search) return;
-
-
-  search.addEventListener(
-    "input",
-    () => {
-
-      const activeFilter =
-        document.querySelector(
-          ".filter.active"
-        );
-
-
-      renderProducts(
-        activeFilter
-          ? activeFilter.dataset.filter
-          : "all"
-      );
-
-    }
-  );
-
-}
-
-
-// =====================================================
-// FILTERS
-// =====================================================
-
-function setupFilters() {
-
-  const filters =
-    document.querySelectorAll(
-      ".filter"
-    );
-
-
-  filters.forEach(
-    button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          filters.forEach(
-            item =>
-              item.classList.remove(
-                "active"
-              )
-          );
-
-
-          button.classList.add(
-            "active"
-          );
-
-
-          renderProducts(
-            button.dataset.filter
-          );
-
-        }
-      );
-
-    }
-  );
+  }
 
 }
 
@@ -485,24 +407,32 @@ function setupFilters() {
 // ADD TO CART
 // =====================================================
 
-function addToCart(
-  productId
-) {
+function addToCart(productId) {
 
   const product =
     products.find(
-      item =>
-        item.id === productId
+      function (item) {
+        return item.id === productId;
+      }
     );
 
+  if (!product) {
 
-  if (!product) return;
+    console.error(
+      "PEPTIVA: Product not found:",
+      productId
+    );
+
+    return;
+
+  }
 
 
   const existing =
     cart.find(
-      item =>
-        item.id === productId
+      function (item) {
+        return item.id === productId;
+      }
     );
 
 
@@ -513,15 +443,13 @@ function addToCart(
   } else {
 
     cart.push({
-
       id: product.id,
-
       name: product.name,
-
+      subtitle: product.subtitle,
+      category: product.category,
       price: product.price,
-
+      image: product.image,
       quantity: 1
-
     });
 
   }
@@ -537,395 +465,66 @@ function addToCart(
 
 
 // =====================================================
+// INCREASE QUANTITY
+// =====================================================
+
+function increaseQuantity(index) {
+
+  if (!cart[index]) {
+    return;
+  }
+
+  cart[index].quantity += 1;
+
+  saveCart();
+
+  updateCart();
+
+}
+
+
+// =====================================================
+// DECREASE QUANTITY
+// =====================================================
+
+function decreaseQuantity(index) {
+
+  if (!cart[index]) {
+    return;
+  }
+
+  cart[index].quantity -= 1;
+
+
+  if (cart[index].quantity <= 0) {
+
+    cart.splice(index, 1);
+
+  }
+
+
+  saveCart();
+
+  updateCart();
+
+}
+
+
+// =====================================================
 // REMOVE FROM CART
 // =====================================================
 
-function removeFromCart(
-  productId
-) {
+function removeFromCart(index) {
 
-  cart =
-    cart.filter(
-      item =>
-        item.id !== productId
-    );
+  if (!cart[index]) {
+    return;
+  }
 
+  cart.splice(index, 1);
 
   saveCart();
 
   updateCart();
-
-}
-
-
-// =====================================================
-// QUANTITY
-// =====================================================
-
-function changeQuantity(
-  productId,
-  amount
-) {
-
-  const item =
-    cart.find(
-      product =>
-        product.id === productId
-    );
-
-
-  if (!item) return;
-
-
-  item.quantity += amount;
-
-
-  if (item.quantity <= 0) {
-
-    removeFromCart(
-      productId
-    );
-
-    return;
-
-  }
-
-
-  saveCart();
-
-  updateCart();
-
-}
-
-
-// =====================================================
-// SAVE CART
-// =====================================================
-
-function saveCart() {
-
-  localStorage.setItem(
-    "peptidesCart",
-    JSON.stringify(cart)
-  );
-
-}
-
-
-// =====================================================
-// TOTAL
-// =====================================================
-
-function getCartTotal() {
-
-  return cart.reduce(
-    (total, item) =>
-      total +
-      item.price *
-      item.quantity,
-    0
-  );
-
-}
-
-
-// =====================================================
-// COUNT
-// =====================================================
-
-function getCartCount() {
-
-  return cart.reduce(
-    (total, item) =>
-      total +
-      item.quantity,
-    0
-  );
-
-}
-
-
-// =====================================================
-// UPDATE CART
-// =====================================================
-
-function updateCart() {
-
-  const cartCount =
-    document.getElementById(
-      "cartCount"
-    );
-
-
-  const cartItems =
-    document.getElementById(
-      "cartItems"
-    );
-
-
-  const cartTotal =
-    document.getElementById(
-      "cartTotal"
-    );
-
-
-  const checkoutTotal =
-    document.getElementById(
-      "checkoutTotal"
-    );
-
-
-  if (cartCount) {
-
-    cartCount.textContent =
-      getCartCount();
-
-  }
-
-
-  if (cartTotal) {
-
-    cartTotal.textContent =
-      `EGP ${formatPrice(
-        getCartTotal()
-      )}`;
-
-  }
-
-
-  if (checkoutTotal) {
-
-    checkoutTotal.textContent =
-      `EGP ${formatPrice(
-        getCartTotal()
-      )}`;
-
-  }
-
-
-  if (!cartItems) return;
-
-
-  if (cart.length === 0) {
-
-    cartItems.innerHTML = `
-
-      <div class="empty-cart">
-
-        <p>
-          Your cart is empty.
-        </p>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  cartItems.innerHTML = "";
-
-
-  cart.forEach(
-    item => {
-
-      const cartItem =
-        document.createElement(
-          "div"
-        );
-
-
-      cartItem.className =
-        "cart-item";
-
-
-      cartItem.innerHTML = `
-
-        <div class="cart-item-info">
-
-          <h4>
-            ${item.name}
-          </h4>
-
-          <span>
-            EGP ${formatPrice(
-              item.price
-            )}
-          </span>
-
-        </div>
-
-
-        <div class="cart-controls">
-
-          <button
-            class="quantity-button"
-            data-action="minus"
-            data-id="${item.id}"
-          >
-            −
-          </button>
-
-
-          <span>
-            ${item.quantity}
-          </span>
-
-
-          <button
-            class="quantity-button"
-            data-action="plus"
-            data-id="${item.id}"
-          >
-            +
-          </button>
-
-
-          <button
-            class="remove-button"
-            data-id="${item.id}"
-          >
-            ×
-          </button>
-
-        </div>
-
-      `;
-
-
-      cartItems.appendChild(
-        cartItem
-      );
-
-    }
-  );
-
-
-  document
-    .querySelectorAll(
-      ".quantity-button"
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            const amount =
-              button.dataset.action ===
-              "plus"
-                ? 1
-                : -1;
-
-
-            changeQuantity(
-              button.dataset.id,
-              amount
-            );
-
-          }
-        );
-
-      }
-    );
-
-
-  document
-    .querySelectorAll(
-      ".remove-button"
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            removeFromCart(
-              button.dataset.id
-            );
-
-          }
-        );
-
-      }
-    );
-
-}
-
-
-// =====================================================
-// CART SETUP
-// =====================================================
-
-function setupCart() {
-
-  const cartButton =
-    document.getElementById(
-      "cartButton"
-    );
-
-
-  const closeCart =
-    document.getElementById(
-      "closeCart"
-    );
-
-
-  const checkoutButton =
-    document.getElementById(
-      "checkoutButton"
-    );
-
-
-  if (cartButton) {
-
-    cartButton.addEventListener(
-      "click",
-      openCart
-    );
-
-  }
-
-
-  if (closeCart) {
-
-    closeCart.addEventListener(
-      "click",
-      closeCartPanel
-    );
-
-  }
-
-
-  if (checkoutButton) {
-
-    checkoutButton.addEventListener(
-      "click",
-      () => {
-
-        if (cart.length === 0) {
-
-          alert(
-            "Your cart is empty."
-          );
-
-          return;
-
-        }
-
-
-        closeCartPanel();
-
-        openCheckout();
-
-      }
-    );
-
-  }
 
 }
 
@@ -936,15 +535,17 @@ function setupCart() {
 
 function openCart() {
 
-  const overlay =
-    document.getElementById(
-      "cartOverlay"
+  if (cartPanel) {
+
+    cartPanel.classList.add(
+      "active"
     );
 
+  }
 
-  if (overlay) {
+  if (cartOverlay) {
 
-    overlay.classList.add(
+    cartOverlay.classList.add(
       "active"
     );
 
@@ -957,17 +558,19 @@ function openCart() {
 // CLOSE CART
 // =====================================================
 
-function closeCartPanel() {
+function closeCart() {
 
-  const overlay =
-    document.getElementById(
-      "cartOverlay"
+  if (cartPanel) {
+
+    cartPanel.classList.remove(
+      "active"
     );
 
+  }
 
-  if (overlay) {
+  if (cartOverlay) {
 
-    overlay.classList.remove(
+    cartOverlay.classList.remove(
       "active"
     );
 
@@ -977,210 +580,72 @@ function closeCartPanel() {
 
 
 // =====================================================
-// PRODUCT MODAL
+// CART BUTTON
 // =====================================================
 
-function openProductModal(
-  product
-) {
+if (cartButton) {
 
-  const modal =
-    document.getElementById(
-      "productModal"
-    );
+  cartButton.addEventListener(
+    "click",
+    function () {
 
+      openCart();
 
-  const image =
-    document.getElementById(
-      "modalProductImage"
-    );
-
-
-  const name =
-    document.getElementById(
-      "modalProductName"
-    );
-
-
-  const category =
-    document.getElementById(
-      "modalProductCategory"
-    );
-
-
-  const description =
-    document.getElementById(
-      "modalProductDescription"
-    );
-
-
-  const price =
-    document.getElementById(
-      "modalProductPrice"
-    );
-
-
-  if (!modal) return;
-
-
-  selectedProduct =
-    product;
-
-
-  if (image) {
-
-    image.src =
-      product.image;
-
-    image.alt =
-      product.name;
-
-  }
-
-
-  if (name) {
-
-    name.textContent =
-      product.name;
-
-  }
-
-
-  if (category) {
-
-    category.textContent =
-      product.category;
-
-  }
-
-
-  if (description) {
-
-    description.textContent =
-      product.description;
-
-  }
-
-
-  if (price) {
-
-    price.textContent =
-      `EGP ${formatPrice(
-        product.price
-      )}`;
-
-  }
-
-
-  modal.classList.add(
-    "active"
+    }
   );
 
 }
 
 
 // =====================================================
-// PRODUCT MODAL SETUP
+// OVERLAY
 // =====================================================
 
-function setupProductModal() {
+if (cartOverlay) {
 
-  const closeButton =
-    document.getElementById(
-      "closeProductModal"
-    );
+  cartOverlay.addEventListener(
+    "click",
+    function () {
 
+      closeCart();
 
-  const addButton =
-    document.getElementById(
-      "modalAddToCart"
-    );
+      closeCheckout();
 
-
-  const modal =
-    document.getElementById(
-      "productModal"
-    );
-
-
-  if (closeButton) {
-
-    closeButton.addEventListener(
-      "click",
-      closeProductModal
-    );
-
-  }
-
-
-  if (addButton) {
-
-    addButton.addEventListener(
-      "click",
-      () => {
-
-        if (!selectedProduct)
-          return;
-
-
-        addToCart(
-          selectedProduct.id
-        );
-
-
-        closeProductModal();
-
-      }
-    );
-
-  }
-
-
-  if (modal) {
-
-    modal.addEventListener(
-      "click",
-      event => {
-
-        if (
-          event.target === modal
-        ) {
-
-          closeProductModal();
-
-        }
-
-      }
-    );
-
-  }
+    }
+  );
 
 }
 
 
 // =====================================================
-// CLOSE PRODUCT MODAL
+// PRODUCT BUTTONS
 // =====================================================
 
-function closeProductModal() {
+function setupProductButtons() {
 
-  const modal =
-    document.getElementById(
-      "productModal"
+  const buttons =
+    document.querySelectorAll(
+      "[data-product-id]"
     );
 
 
-  if (modal) {
+  buttons.forEach(
+    function (button) {
 
-    modal.classList.remove(
-      "active"
-    );
+      button.addEventListener(
+        "click",
+        function () {
 
-  }
+          const productId =
+            button.dataset.productId;
 
+          addToCart(productId);
 
-  selectedProduct =
-    null;
+        }
+      );
+
+    }
+  );
 
 }
 
@@ -1191,323 +656,47 @@ function closeProductModal() {
 
 function setupCheckout() {
 
-  const form =
+  const checkoutButton =
     document.getElementById(
-      "orderForm"
+      "checkoutButton"
     );
 
 
-  const closeButton =
-    document.getElementById(
-      "closeCheckout"
-    );
+  if (checkoutButton) {
 
-
-  if (closeButton) {
-
-    closeButton.addEventListener(
+    checkoutButton.addEventListener(
       "click",
-      closeCheckout
+      function () {
+
+        if (cart.length === 0) {
+
+          alert(
+            "Your cart is empty."
+          );
+
+          return;
+
+        }
+
+        openCheckout();
+
+      }
     );
 
   }
 
 
-  if (!form) return;
+  if (checkoutForm) {
 
+    checkoutForm.addEventListener(
+      "submit",
+      async function (event) {
 
-  form.addEventListener(
-    "submit",
-    async event => {
+        event.preventDefault();
 
-      event.preventDefault();
-
-
-      if (cart.length === 0) {
-
-        alert(
-          "Your cart is empty."
-        );
-
-        return;
+        await submitOrder();
 
       }
-
-
-      const name =
-        document
-          .getElementById(
-            "customerName"
-          )
-          .value
-          .trim();
-
-
-      const phone =
-        document
-          .getElementById(
-            "customerPhone"
-          )
-          .value
-          .trim();
-
-
-      const city =
-        document
-          .getElementById(
-            "customerCity"
-          )
-          .value
-          .trim();
-
-
-      const notes =
-        document
-          .getElementById(
-            "customerNotes"
-          )
-          .value
-          .trim();
-
-
-      const transactionReference =
-        document
-          .getElementById(
-            "transactionReference"
-          )
-          .value
-          .trim();
-
-
-      if (!transactionReference) {
-
-        alert(
-          "Please enter your InstaPay transaction reference."
-        );
-
-        return;
-
-      }
-
-
-      const orderId =
-        "ORD-" +
-        Date.now();
-
-
-      const orderData = {
-
-        order_id:
-          orderId,
-
-        date:
-          new Date().toISOString(),
-
-        payment_method:
-          "InstaPay",
-
-        payment_account:
-          INSTAPAY_NUMBER,
-
-        payment_reference:
-          transactionReference,
-
-        payment_status:
-          "Pending Payment",
-
-        customer: {
-
-          name:
-            name,
-
-          phone:
-            phone,
-
-          city:
-            city,
-
-          notes:
-            notes
-
-        },
-
-        products:
-          cart,
-
-        products_text:
-          cart
-            .map(
-              item =>
-                `${item.name} × ${item.quantity}`
-            )
-            .join("\n"),
-
-        total:
-          getCartTotal()
-
-      };
-
-
-      const submitButton =
-        form.querySelector(
-          'button[type="submit"]'
-        );
-
-
-      if (submitButton) {
-
-        submitButton.disabled =
-          true;
-
-        submitButton.textContent =
-          "Submitting...";
-
-      }
-
-
-      try {
-
-        await sendOrderToGoogleSheets(
-          orderData
-        );
-
-
-        saveOrderLocally(
-          orderData
-        );
-
-
-        cart = [];
-
-
-        saveCart();
-
-        updateCart();
-
-        form.reset();
-
-        closeCheckout();
-
-        showSuccess(
-          orderId
-        );
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Order error:",
-          error
-        );
-
-
-        alert(
-          "There was a problem submitting the order. Please try again."
-        );
-
-      }
-
-
-      if (submitButton) {
-
-        submitButton.disabled =
-          false;
-
-        submitButton.textContent =
-          "Confirm Order";
-
-      }
-
-    }
-  );
-
-}
-
-
-// =====================================================
-// SEND TO GOOGLE SHEETS
-// =====================================================
-
-async function sendOrderToGoogleSheets(
-  orderData
-) {
-
-  await fetch(
-    GOOGLE_SCRIPT_URL,
-    {
-
-      method:
-        "POST",
-
-      mode:
-        "no-cors",
-
-      headers: {
-
-        "Content-Type":
-          "text/plain;charset=utf-8"
-
-      },
-
-      body:
-        JSON.stringify(
-          orderData
-        )
-
-    }
-  );
-
-}
-
-
-// =====================================================
-// LOCAL ORDER
-// =====================================================
-
-function saveOrderLocally(
-  orderData
-) {
-
-  const orders =
-    JSON.parse(
-      localStorage.getItem(
-        "peptidesOrders"
-      )
-    ) || [];
-
-
-  orders.push(
-    orderData
-  );
-
-
-  localStorage.setItem(
-    "peptidesOrders",
-    JSON.stringify(
-      orders
-    )
-  );
-
-}
-
-
-// =====================================================
-// CLOSE CHECKOUT
-// =====================================================
-
-function closeCheckout() {
-
-  const overlay =
-    document.getElementById(
-      "checkoutOverlay"
-    );
-
-
-  if (overlay) {
-
-    overlay.classList.remove(
-      "active"
     );
 
   }
@@ -1521,20 +710,467 @@ function closeCheckout() {
 
 function openCheckout() {
 
+  if (cartPanel) {
+
+    cartPanel.classList.remove(
+      "active"
+    );
+
+  }
+
+
+  if (checkoutPanel) {
+
+    checkoutPanel.classList.add(
+      "active"
+    );
+
+  }
+
+
+  if (cartOverlay) {
+
+    cartOverlay.classList.add(
+      "active"
+    );
+
+  }
+
+}
+
+
+// =====================================================
+// CLOSE CHECKOUT
+// =====================================================
+
+function closeCheckout() {
+
+  if (checkoutPanel) {
+
+    checkoutPanel.classList.remove(
+      "active"
+    );
+
+  }
+
+}
+
+
+// =====================================================
+// SUBMIT ORDER
+// =====================================================
+
+async function submitOrder() {
+
+  console.log(
+    "===================================="
+  );
+
+  console.log(
+    "PEPTIVA ORDER DIAGNOSTIC START"
+  );
+
+  console.log(
+    "===================================="
+  );
+
+
+  const name =
+    document.getElementById(
+      "customerName"
+    )?.value.trim() || "";
+
+
+  const phone =
+    document.getElementById(
+      "customerPhone"
+    )?.value.trim() || "";
+
+
+  const city =
+    document.getElementById(
+      "customerCity"
+    )?.value.trim() || "";
+
+
+  const notes =
+    document.getElementById(
+      "customerNotes"
+    )?.value.trim() || "";
+
+
+  const transactionReference =
+    document.getElementById(
+      "transactionReference"
+    )?.value.trim() || "";
+
+
+  console.log(
+    "Customer:",
+    {
+      name,
+      phone,
+      city
+    }
+  );
+
+
+  console.log(
+    "Transaction Reference:",
+    transactionReference
+  );
+
+
+  console.log(
+    "Cart:",
+    cart
+  );
+
+
+  if (!name) {
+
+    alert(
+      "Please enter your name."
+    );
+
+    return;
+
+  }
+
+
+  if (!phone) {
+
+    alert(
+      "Please enter your phone number."
+    );
+
+    return;
+
+  }
+
+
+  if (!city) {
+
+    alert(
+      "Please enter your city."
+    );
+
+    return;
+
+  }
+
+
+  if (cart.length === 0) {
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+
+  const orderId =
+    "PEP-" +
+    Date.now();
+
+
+  const orderData = {
+
+    order_id:
+      orderId,
+
+    date:
+      new Date().toISOString(),
+
+    payment_method:
+      "InstaPay",
+
+    payment_account:
+      INSTAPAY_NUMBER,
+
+    payment_reference:
+      transactionReference,
+
+    payment_status:
+      "Pending Payment",
+
+    customer: {
+
+      name:
+        name,
+
+      phone:
+        phone,
+
+      city:
+        city,
+
+      notes:
+        notes
+
+    },
+
+    products:
+      cart,
+
+    products_text:
+      cart
+        .map(
+          function (item) {
+
+            return (
+              `${item.name} × ${item.quantity}`
+            );
+
+          }
+        )
+        .join("\n"),
+
+    total:
+      getCartTotal()
+
+  };
+
+
+  console.log(
+    "ORDER DATA CREATED:"
+  );
+
+  console.log(
+    orderData
+  );
+
+
+  // ===================================================
+  // SEND TO GOOGLE SHEETS
+  // ===================================================
+
+  let googleResult = false;
+
+
+  try {
+
+    googleResult =
+      await sendOrderToGoogleSheets(
+        orderData
+      );
+
+
+    console.log(
+      "Google Sheets fetch completed:",
+      googleResult
+    );
+
+  }
+  catch (error) {
+
+    console.error(
+      "Google Sheets fetch ERROR:",
+      error
+    );
+
+  }
+
+
+  // ===================================================
+  // SAVE LOCAL COPY
+  // ===================================================
+
+  saveOrderLocally(
+    orderData
+  );
+
+
+  console.log(
+    "Order saved locally."
+  );
+
+
+  // ===================================================
+  // CLEAR CART
+  // ===================================================
+
+  cart = [];
+
+  saveCart();
+
   updateCart();
 
 
-  const overlay =
-    document.getElementById(
-      "checkoutOverlay"
+  if (checkoutForm) {
+
+    checkoutForm.reset();
+
+  }
+
+
+  closeCheckout();
+
+  closeCart();
+
+
+  showSuccess(
+    orderId
+  );
+
+
+  console.log(
+    "===================================="
+  );
+
+  console.log(
+    "PEPTIVA ORDER DIAGNOSTIC END"
+  );
+
+  console.log(
+    "===================================="
+
+  );
+
+}
+
+
+// =====================================================
+// GOOGLE SHEETS SEND — DIAGNOSTIC VERSION
+// =====================================================
+
+async function sendOrderToGoogleSheets(
+  orderData
+) {
+
+  console.log(
+    "------------------------------------"
+  );
+
+  console.log(
+    "GOOGLE SHEETS SEND START"
+  );
+
+
+  console.log(
+    "Endpoint:",
+    GOOGLE_SCRIPT_URL
+  );
+
+
+  console.log(
+    "Method: POST"
+  );
+
+
+  console.log(
+    "Mode: no-cors"
+  );
+
+
+  console.log(
+    "Payload:"
+  );
+
+
+  console.log(
+    JSON.stringify(
+      orderData,
+      null,
+      2
+    )
+  );
+
+
+  const payload =
+    JSON.stringify(
+      orderData
     );
 
 
-  if (overlay) {
+  try {
 
-    overlay.classList.add(
-      "active"
+    const response =
+      await fetch(
+        GOOGLE_SCRIPT_URL,
+        {
+
+          method:
+            "POST",
+
+          mode:
+            "no-cors",
+
+          headers: {
+
+            "Content-Type":
+              "text/plain;charset=utf-8"
+
+          },
+
+          body:
+            payload
+
+        }
+      );
+
+
+    console.log(
+      "GOOGLE SHEETS FETCH FINISHED"
     );
+
+
+    console.log(
+      "Response type:",
+      response.type
+    );
+
+
+    console.log(
+      "Response status:",
+      response.status
+    );
+
+
+    console.log(
+      "Response URL:",
+      response.url
+    );
+
+
+    console.log(
+      "IMPORTANT: no-cors prevents reading Google's response."
+    );
+
+
+    console.log(
+      "If there is no browser/network error, the POST request was sent."
+    );
+
+
+    console.log(
+      "------------------------------------"
+    );
+
+
+    return true;
+
+  }
+  catch (error) {
+
+    console.error(
+      "GOOGLE SHEETS FETCH FAILED"
+    );
+
+
+    console.error(
+      error
+    );
+
+
+    console.log(
+      "------------------------------------"
+    );
+
+
+    return false;
 
   }
 
@@ -1549,29 +1185,17 @@ function showSuccess(
   orderId
 ) {
 
-  const overlay =
-    document.getElementById(
-      "successOverlay"
-    );
+  if (orderIdElement) {
 
-
-  const orderNumber =
-    document.getElementById(
-      "successOrderId"
-    );
-
-
-  if (orderNumber) {
-
-    orderNumber.textContent =
+    orderIdElement.textContent =
       orderId;
 
   }
 
 
-  if (overlay) {
+  if (successOverlay) {
 
-    overlay.classList.add(
+    successOverlay.classList.add(
       "active"
     );
 
@@ -1581,36 +1205,20 @@ function showSuccess(
 
 
 // =====================================================
-// SUCCESS CLOSE
+// CLOSE SUCCESS
 // =====================================================
 
-document.addEventListener(
-  "click",
-  event => {
+function closeSuccess() {
 
-    if (
-      event.target.id ===
-      "closeSuccess"
-    ) {
+  if (successOverlay) {
 
-      const overlay =
-        document.getElementById(
-          "successOverlay"
-        );
-
-
-      if (overlay) {
-
-        overlay.classList.remove(
-          "active"
-        );
-
-      }
-
-    }
+    successOverlay.classList.remove(
+      "active"
+    );
 
   }
-);
+
+}
 
 
 // =====================================================
@@ -1624,46 +1232,227 @@ function setupMobileMenu() {
       "menuButton"
     );
 
-
-  const navLinks =
+  const nav =
     document.querySelector(
-      ".nav-links"
+      ".nav"
     );
 
 
   if (
-    !menuButton ||
-    !navLinks
+    menuButton &&
+    nav
   ) {
 
-    return;
+    menuButton.addEventListener(
+      "click",
+      function () {
+
+        nav.classList.toggle(
+          "active"
+        );
+
+      }
+    );
 
   }
 
+}
 
-  menuButton.addEventListener(
-    "click",
-    () => {
 
-      navLinks.classList.toggle(
-        "mobile-active"
+// =====================================================
+// FILTERS
+// =====================================================
+
+function setupFilters() {
+
+  const filterButtons =
+    document.querySelectorAll(
+      "[data-filter]"
+    );
+
+
+  filterButtons.forEach(
+    function (button) {
+
+      button.addEventListener(
+        "click",
+        function () {
+
+          const filter =
+            button.dataset.filter;
+
+
+          filterButtons.forEach(
+            function (btn) {
+
+              btn.classList.remove(
+                "active"
+              );
+
+            }
+          );
+
+
+          button.classList.add(
+            "active"
+          );
+
+
+          const cards =
+            document.querySelectorAll(
+              ".product-card"
+            );
+
+
+          cards.forEach(
+            function (card) {
+
+              const category =
+                card.dataset.category;
+
+
+              if (
+                filter === "all" ||
+                category === filter
+              ) {
+
+                card.style.display =
+                  "";
+
+              } else {
+
+                card.style.display =
+                  "none";
+
+              }
+
+            }
+          );
+
+        }
       );
 
     }
   );
 
+}
 
-  navLinks
-    .querySelectorAll("a")
+
+// =====================================================
+// SEARCH
+// =====================================================
+
+function setupSearch() {
+
+  const searchInput =
+    document.getElementById(
+      "searchInput"
+    );
+
+
+  if (!searchInput) {
+    return;
+  }
+
+
+  searchInput.addEventListener(
+    "input",
+    function () {
+
+      const search =
+        searchInput.value
+          .toLowerCase()
+          .trim();
+
+
+      const cards =
+        document.querySelectorAll(
+          ".product-card"
+        );
+
+
+      cards.forEach(
+        function (card) {
+
+          const text =
+            card.textContent
+              .toLowerCase();
+
+
+          if (
+            text.includes(search)
+          ) {
+
+            card.style.display =
+              "";
+
+          } else {
+
+            card.style.display =
+              "none";
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+}
+
+
+// =====================================================
+// PRODUCT MODAL
+// =====================================================
+
+function setupModal() {
+
+  const modal =
+    document.getElementById(
+      "productModal"
+    );
+
+
+  const modalClose =
+    document.getElementById(
+      "modalClose"
+    );
+
+
+  if (!modal) {
+    return;
+  }
+
+
+  document
+    .querySelectorAll(
+      ".product-card"
+    )
     .forEach(
-      link => {
+      function (card) {
 
-        link.addEventListener(
+        card.addEventListener(
           "click",
-          () => {
+          function (event) {
 
-            navLinks.classList.remove(
-              "mobile-active"
+            if (
+              event.target.closest(
+                "button"
+              )
+            ) {
+
+              return;
+
+            }
+
+
+            const productId =
+              card.dataset.productId;
+
+
+            openProductModal(
+              productId
             );
 
           }
@@ -1672,20 +1461,211 @@ function setupMobileMenu() {
       }
     );
 
-}
 
+  if (modalClose) {
 
-// =====================================================
-// PRICE FORMAT
-// =====================================================
+    modalClose.addEventListener(
+      "click",
+      function () {
 
-function formatPrice(
-  number
-) {
+        modal.classList.remove(
+          "active"
+        );
 
-  return Number(number)
-    .toLocaleString(
-      "en-US"
+      }
     );
 
+  }
+
+
+  modal.addEventListener(
+    "click",
+    function (event) {
+
+      if (
+        event.target === modal
+      ) {
+
+        modal.classList.remove(
+          "active"
+        );
+
+      }
+
+    }
+  );
+
 }
+
+
+// =====================================================
+// OPEN PRODUCT MODAL
+// =====================================================
+
+function openProductModal(
+  productId
+) {
+
+  const product =
+    products.find(
+      function (item) {
+
+        return (
+          item.id === productId
+        );
+
+      }
+    );
+
+
+  if (!product) {
+    return;
+  }
+
+
+  const modal =
+    document.getElementById(
+      "productModal"
+    );
+
+
+  const modalImage =
+    document.getElementById(
+      "modalImage"
+    );
+
+
+  const modalTitle =
+    document.getElementById(
+      "modalTitle"
+    );
+
+
+  const modalSubtitle =
+    document.getElementById(
+      "modalSubtitle"
+    );
+
+
+  const modalDescription =
+    document.getElementById(
+      "modalDescription"
+    );
+
+
+  const modalHowWorks =
+    document.getElementById(
+      "modalHowWorks"
+    );
+
+
+  const modalPrice =
+    document.getElementById(
+      "modalPrice"
+    );
+
+
+  if (modalImage) {
+
+    modalImage.src =
+      product.image;
+
+    modalImage.alt =
+      product.name;
+
+  }
+
+
+  if (modalTitle) {
+
+    modalTitle.textContent =
+      product.name;
+
+  }
+
+
+  if (modalSubtitle) {
+
+    modalSubtitle.textContent =
+      product.subtitle;
+
+  }
+
+
+  if (modalDescription) {
+
+    modalDescription.textContent =
+      product.description;
+
+  }
+
+
+  if (modalHowWorks) {
+
+    modalHowWorks.textContent =
+      product.howItWorks;
+
+  }
+
+
+  if (modalPrice) {
+
+    modalPrice.textContent =
+      `${product.price.toLocaleString()} EGP`;
+
+  }
+
+
+  if (modal) {
+
+    modal.classList.add(
+      "active"
+    );
+
+  }
+
+}
+
+
+// =====================================================
+// GLOBAL FUNCTIONS
+// =====================================================
+
+window.addToCart =
+  addToCart;
+
+window.increaseQuantity =
+  increaseQuantity;
+
+window.decreaseQuantity =
+  decreaseQuantity;
+
+window.removeFromCart =
+  removeFromCart;
+
+window.openCart =
+  openCart;
+
+window.closeCart =
+  closeCart;
+
+window.openCheckout =
+  openCheckout;
+
+window.closeCheckout =
+  closeCheckout;
+
+window.closeSuccess =
+  closeSuccess;
+
+window.openProductModal =
+  openProductModal;
+
+
+// =====================================================
+// END OF PEPTIVA SCRIPT
+// =====================================================
+
+console.log(
+  "PEPTIVA script.js loaded successfully."
+);
