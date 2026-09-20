@@ -27,7 +27,7 @@ const products = [
     categoryLabel: "Recovery",
     price: 3800,
     image: "BPC VIAL.png",
-    description: "Research-focused peptide combination."
+    description: "Recovery peptide."
   },
 
   {
@@ -38,7 +38,7 @@ const products = [
     categoryLabel: "Research",
     price: 4600,
     image: "RETA10MG.png",
-    description: "fat loss peptide."
+    description: "Fat Loss peptide."
   },
 
   {
@@ -49,7 +49,7 @@ const products = [
     categoryLabel: "Research",
     price: 4600,
     image: "SLU.png",
-    description: "fat loss peptide."
+    description: "Fat Loss peptide."
   },
 
   {
@@ -60,7 +60,7 @@ const products = [
     categoryLabel: "Research",
     price: 4600,
     image: "igf1.png",
-    description: "performance peptide"
+    description: "Performance peptide"
   },
 
   {
@@ -71,7 +71,7 @@ const products = [
     categoryLabel: "Research",
     price: 8500,
     image: "RETA10MG.png",
-    description: "fat loss peptide"
+    description: "Fat Loss peptide"
   },
 
   {
@@ -93,7 +93,7 @@ const products = [
     categoryLabel: "Research",
     price: 6000,
     image: "GHK.png",
-    description: "welness peptide."
+    description: "Wellness peptide."
   },
 
   {
@@ -104,7 +104,7 @@ const products = [
     categoryLabel: "Research",
     price: 4800,
     image: "kpv.png",
-    description: "Research-focused product."
+    description: "Wellness peptide."
   },
 
   {
@@ -115,7 +115,7 @@ const products = [
     categoryLabel: "Research",
     price: 5600,
     image: "mots c.png",
-    description: "Research-focused product."
+    description: "Wellness peptide."
   }
 
 ];
