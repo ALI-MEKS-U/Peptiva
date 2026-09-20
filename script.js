@@ -5,7 +5,6 @@
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzbrR6dZI7aMHuqDHF5AQkd3id5UhrnDPrAPhgryURTHKo6Y2wzuXKJECG0Ct912jpc/exec";
 
-const INSTAPAY_NUMBER = "01277728571";
 
 
 /* =========================================================
