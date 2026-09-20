@@ -80,7 +80,7 @@ const products = [
     subtitle: "60 MG",
     category: "other",
     categoryLabel: "Other",
-    price: 8500,
+    price: 8700,
     image: "TRIZ VIAL.png",
     description: "Research-focused product."
   },
