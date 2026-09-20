@@ -26,7 +26,7 @@ const products = [
     category: "recovery",
     categoryLabel: "Recovery",
     price: 3800,
-    image: "images/BPC VIAL.png",
+    image: "BPC VIAL.png",
     description: "Research-focused peptide combination."
   },
 
@@ -37,8 +37,8 @@ const products = [
     category: "research",
     categoryLabel: "Research",
     price: 4600,
-    image: "images/RETA10MG.png",
-    description: "Research peptide product."
+    image: "RETA10MG.png",
+    description: "fat loss peptide."
   },
 
   {
@@ -48,8 +48,8 @@ const products = [
     category: "research",
     categoryLabel: "Research",
     price: 4600,
-    image: "images/SLU.png",
-    description: "Research-focused compound."
+    image: "SLU.png",
+    description: "fat loss peptide."
   },
 
   {
@@ -59,8 +59,8 @@ const products = [
     category: "research",
     categoryLabel: "Research",
     price: 4600,
-    image: "images/igf1.png",
-    description: "Research peptide product."
+    image: "igf1.png",
+    description: "performance peptide"
   },
 
   {
@@ -70,8 +70,8 @@ const products = [
     category: "research",
     categoryLabel: "Research",
     price: 8500,
-    image: "images/RETA10MG.png",
-    description: "Higher quantity research product."
+    image: "RETA10MG.png",
+    description: "fat loss peptide"
   },
 
   {
@@ -81,7 +81,7 @@ const products = [
     category: "other",
     categoryLabel: "Other",
     price: 8400,
-    image: "images/TRIZ VIAL.png",
+    image: "TRIZ VIAL.png",
     description: "Research-focused product."
   },
 
@@ -92,8 +92,8 @@ const products = [
     category: "research",
     categoryLabel: "Research",
     price: 6000,
-    image: "images/GHK.png",
-    description: "Research-focused product."
+    image: "GHK.png",
+    description: "welness peptide."
   },
 
   {
@@ -103,7 +103,7 @@ const products = [
     category: "research",
     categoryLabel: "Research",
     price: 4800,
-    image: "images/kpv.png",
+    image: "kpv.png",
     description: "Research-focused product."
   },
 
@@ -114,7 +114,7 @@ const products = [
     category: "research",
     categoryLabel: "Research",
     price: 5600,
-    image: "images/mots c.png",
+    image: "mots c.png",
     description: "Research-focused product."
   }
 
