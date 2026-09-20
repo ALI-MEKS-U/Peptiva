@@ -36,7 +36,7 @@ const products = [
     subtitle: "10 MG",
     category: "research",
     categoryLabel: "Research",
-    price: 4600,
+    price: 5000,
     image: "RETA10MG.png",
     description: "Fat Loss peptide."
   },
@@ -47,7 +47,7 @@ const products = [
     subtitle: "60 Capsules",
     category: "research",
     categoryLabel: "Research",
-    price: 4600,
+    price: 5500,
     image: "SLU.png",
     description: "Fat Loss peptide."
   },
@@ -69,7 +69,7 @@ const products = [
     subtitle: "20 MG",
     category: "research",
     categoryLabel: "Research",
-    price: 8500,
+    price: 8300,
     image: "RETA10MG.png",
     description: "Fat Loss peptide"
   },
@@ -80,7 +80,7 @@ const products = [
     subtitle: "60 MG",
     category: "other",
     categoryLabel: "Other",
-    price: 8400,
+    price: 8500,
     image: "TRIZ VIAL.png",
     description: "Research-focused product."
   },
